@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: precedentiq-api
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        sync: false
+      - key: PGSSLMODE
+        value: require
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 8h
+      - key: BCRYPT_SALT_ROUNDS
+        value: 12
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CLIENT_ORIGIN
+        sync: false
+      - key: MAX_UPLOAD_MB
+        value: 50

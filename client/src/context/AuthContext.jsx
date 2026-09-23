@@ -31,6 +31,9 @@ export function AuthProvider({ children }) {
     setAuthError(null);
     try {
       const data = await authService.login(credentials);
+      if (data.token) {
+        localStorage.setItem('precedentiq_token', data.token);
+      }
       setUser(data.user);
       return data.user;
     } catch (err) {
@@ -46,6 +49,9 @@ export function AuthProvider({ children }) {
     setAuthError(null);
     try {
       const data = await authService.register(userData);
+      if (data.token) {
+        localStorage.setItem('precedentiq_token', data.token);
+      }
       setUser(data.user);
       return data.user;
     } catch (err) {
@@ -62,6 +68,7 @@ export function AuthProvider({ children }) {
     } catch (err) {
       console.warn('Logout error:', err);
     } finally {
+      localStorage.removeItem('precedentiq_token');
       setUser(null);
     }
   };

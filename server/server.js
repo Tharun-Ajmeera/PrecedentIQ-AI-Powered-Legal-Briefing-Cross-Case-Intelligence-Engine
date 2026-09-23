@@ -29,7 +29,10 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
+const allowedOrigins = (process.env.CLIENT_ORIGIN || 'http://localhost:5173')
+  .split(',')
+  .map((origin) => origin.trim().replace(/\/+$/, ''))
+  .filter(Boolean);
 
 // 1. Security Headers & CORS
 app.use(
@@ -42,10 +45,20 @@ app.use(
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || origin === CLIENT_ORIGIN || origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
+      // Allow requests with no origin (like mobile apps, curl, server-to-server)
+      if (!origin) return callback(null, true);
+
+      const cleanOrigin = origin.trim().replace(/\/+$/, '');
+      const isAllowed =
+        allowedOrigins.includes(cleanOrigin) ||
+        cleanOrigin.startsWith('http://localhost:') ||
+        cleanOrigin.startsWith('http://127.0.0.1:') ||
+        cleanOrigin.endsWith('.vercel.app');
+
+      if (isAllowed) {
         callback(null, true);
       } else {
-        callback(new Error('CORS request blocked by PrecedentIQ Security Policy'));
+        callback(new Error(`CORS blocked by PrecedentIQ Security Policy for origin: ${origin}`));
       }
     },
     credentials: true,
