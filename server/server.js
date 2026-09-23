@@ -73,7 +73,17 @@ app.use(cookieParser());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// 3. Health check route
+// 3. Status & Health routes
+app.get('/', (req, res) => {
+  res.json({
+    status: 'online',
+    system: 'PrecedentIQ Legal Intelligence Engine API Server',
+    version: '1.0.0',
+    healthCheck: '/api/health',
+    message: 'Backend API is operational. Access the frontend application on Vercel.',
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'healthy',
