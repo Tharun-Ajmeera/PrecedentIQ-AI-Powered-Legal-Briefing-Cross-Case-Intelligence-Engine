@@ -1,0 +1,1 @@
+export { BriefVersionHistory } from './BriefComponents';

@@ -1,0 +1,17 @@
+{
+  "name": "precedentiq",
+  "version": "1.0.0",
+  "description": "PrecedentIQ — AI-Powered Legal Briefing & Cross-Case Intelligence Engine",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "start": "node server/server.js",
+    "server": "node server/server.js",
+    "client": "node node_modules/vite/bin/vite.js client",
+    "build": "node node_modules/vite/bin/vite.js build client",
+    "test": "node --test server/tests/api.test.js server/tests/e2e.test.js"
+  }
+}

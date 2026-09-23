@@ -1,0 +1,37 @@
+UNITED STATES DISTRICT COURT
+SOUTHERN DISTRICT OF NEW YORK
+Case No. 1:24-cv-08492-DLC
+
+MERIDIAN HEALTH AI, INC.,
+    Plaintiff,
+v.
+APEX BIOMED SYSTEMS, LLC,
+    Defendant.
+
+EXHIBIT A: MASTER SOFTWARE LICENSE AND PROPRIETARY DATA COVENANT
+Effective Date: March 15, 2023
+
+PAGE 1
+======
+1. RECITALS & DEFINITION OF CONFIDENTIAL DATA
+1.1 Meridian Health AI, Inc. ("Licensor") has developed proprietary neural diagnostic algorithms known as the "Synapse-V Platform".
+1.2 Apex BioMed Systems, LLC ("Licensee") desires to deploy Synapse-V within its regional medical imaging facilities under strict confidentiality covenants.
+1.3 "Confidential Architecture" shall expressly include all algorithmic weights, prompt telemetry pipelines, training weights, and vector embedding schema files stored in the /models/synapse repository.
+
+PAGE 2
+======
+2. REVERSE ENGINEERING & AUDIT RESTRICTIONS
+2.1 Section 4.2: Reverse Engineering Prohibition.
+Licensee shall not, directly or indirectly through any affiliate, subcontractor, or departing employee, decompile, disassemble, reverse engineer, or inspect the underlying convolutional layers of Synapse-V.
+2.2 Section 4.3: Notice of Suspected Breach.
+In the event Licensor suspects any exfiltration or unauthorized access to the Confidential Architecture, Licensor must deliver written notice specifying the exact IP address and system access logs within thirty (30) calendar days of initial discovery.
+
+PAGE 3
+======
+3. TERMINATION, CURE PERIOD & LIQUIDATED DAMAGES
+3.1 Section 8.1: Termination for Material Breach.
+Either party may terminate this Agreement upon written notice if the other party commits a material breach and fails to cure such breach within sixty (60) calendar days after receipt of formal certified written notice.
+3.2 Section 8.4: Liquidated Damages.
+Any willful deployment of derivative algorithms derived from Synapse-V within twenty-four (24) months of contract execution shall incur liquidated damages of $15,000,000 (Fifteen Million US Dollars), plus all reasonable attorneys' fees and costs.
+
+[Signatures Executed on March 15, 2023 by Dr. Eleanor Vance (Licensor) and Marcus Vance (Licensee)]

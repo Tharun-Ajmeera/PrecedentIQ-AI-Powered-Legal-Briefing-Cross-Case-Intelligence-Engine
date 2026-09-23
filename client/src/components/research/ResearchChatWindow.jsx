@@ -1,0 +1,1 @@
+export { ResearchChatWindow } from './ResearchComponents';

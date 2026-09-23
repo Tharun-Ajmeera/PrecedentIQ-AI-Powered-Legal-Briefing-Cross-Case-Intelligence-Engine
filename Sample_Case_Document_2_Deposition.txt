@@ -1,0 +1,36 @@
+UNITED STATES DISTRICT COURT
+SOUTHERN DISTRICT OF NEW YORK
+Case No. 1:24-cv-08492-DLC
+
+MERIDIAN HEALTH AI, INC.,
+    Plaintiff,
+v.
+APEX BIOMED SYSTEMS, LLC,
+    Defendant.
+
+EXHIBIT B: VIDEOTAPED DEPOSITION OF MARCUS VANCE
+Taken on October 14, 2024 at New York, New York
+
+PAGE 1
+======
+Q: Please state your full name and corporate capacity for the record.
+A: Marcus Vance. I am the Founder and Chief Technology Officer of Apex BioMed Systems, LLC.
+
+Q: Mr. Vance, turning your attention to Section 4.2 of Exhibit A, you were aware that reverse engineering the Synapse-V model weights was strictly prohibited?
+A: Yes, I read and executed the agreement on March 15, 2023.
+
+PAGE 2
+======
+Q: On August 12, 2024, did you download the repository folder titled /models/synapse onto your personal unencrypted hard drive?
+A: (Witness confers with counsel). On August 12, I performed a routine synchronization of the production cache to an external SanDisk drive for debugging latency.
+
+Q: Did that drive leave the Apex BioMed server facility?
+A: Yes, I took it to my home office in Austin, Texas.
+
+PAGE 3
+======
+Q: Isn't it true that on September 2, 2024, Apex BioMed filed Patent Application US-2024-039182 featuring neural diagnostic weights identical to Synapse-V?
+A: Our patent application describes our proprietary BioScan system. There may be mathematical similarities in the convolutional tensor dimensions, but it was written from scratch over a weekend.
+
+Q: Did Meridian Health send you a formal certified cure notice on September 18, 2024?
+A: We received an email on September 18 from their outside counsel. We did not reply because we did not consider an email to satisfy certified mail under Section 8.1.

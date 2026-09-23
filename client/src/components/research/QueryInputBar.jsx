@@ -1,0 +1,1 @@
+export { QueryInputBar } from './ResearchComponents';
