@@ -81,29 +81,34 @@ export function CaseWorkspacePage() {
 
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8">
-      {/* Workspace Header */}
-      <div className="p-6 rounded-2xl bg-gradient-to-r from-slate-900 to-slate-900/60 border border-slate-800 shadow-xl space-y-4">
+      {/* Executive Matter Dossier Hero */}
+      <div className="p-6 rounded-2xl legal-card space-y-5">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30">
-                {currentCase.status} Matter
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/35">
+                {currentCase.status || 'Active'} Litigation Matter
               </span>
               {currentCase.matter_number && (
-                <span className="text-xs font-mono text-slate-400">
-                  #{currentCase.matter_number}
+                <span className="text-xs font-mono text-amber-400/90 bg-[#070B14] px-2 py-0.5 rounded border border-[#1E2B45]">
+                  Docket #{currentCase.matter_number}
+                </span>
+              )}
+              {currentCase.jurisdiction && (
+                <span className="text-xs font-medium text-slate-300 bg-slate-800/60 px-2 py-0.5 rounded border border-slate-700">
+                  {currentCase.jurisdiction}
                 </span>
               )}
             </div>
-            <h1 className="text-2xl font-bold text-slate-100 tracking-tight">
+            <h1 className="text-2xl md:text-3xl font-serif font-bold text-slate-100 tracking-tight">
               {currentCase.title}
             </h1>
             <div className="flex items-center gap-3 text-xs text-slate-400 pt-1">
-              <span>Opened by {currentCase.created_by_name || 'Counsel'}</span>
+              <span>Counsel: <strong className="text-slate-300">{currentCase.created_by_name || 'Partner / Attorney'}</strong></span>
               <span>•</span>
-              <span className="flex items-center gap-1">
+              <span className="flex items-center gap-1 font-mono">
                 <Calendar className="w-3.5 h-3.5 text-slate-500" />
-                {new Date(currentCase.created_at).toLocaleDateString()}
+                {new Date(currentCase.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
               </span>
             </div>
           </div>
@@ -115,57 +120,57 @@ export function CaseWorkspacePage() {
               icon={UploadCloud}
               onClick={() => navigate(`/cases/${caseId}/upload`)}
             >
-              Ingest Document
+              Ingest Evidence Files
             </Button>
           </div>
         </div>
 
         {/* Quick Intelligence Tool Bar */}
-        <div className="pt-4 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="pt-4 border-t border-[#1E2B45] grid grid-cols-2 sm:grid-cols-4 gap-3">
           <Link
             to={`/cases/${caseId}/research`}
-            className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-500/40 hover:bg-slate-900 transition-all flex items-center gap-3 group"
+            className="p-3.5 rounded-xl bg-[#070B14]/80 border border-[#1E2B45] hover:border-amber-500/50 hover:bg-[#0D1527] transition-all flex items-center gap-3 group shadow-sm"
           >
-            <div className="p-2 rounded-lg bg-amber-500/10 text-amber-400 group-hover:scale-105 transition-transform">
-              <Search className="w-4 h-4" />
+            <div className="p-2.5 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/25 group-hover:scale-105 group-hover:border-amber-400/50 transition-all">
+              <Search className="w-4 h-4 stroke-[2.2]" />
             </div>
             <div>
-              <div className="text-xs font-semibold text-slate-200 group-hover:text-amber-400">
-                RAG Research
+              <div className="text-xs font-semibold text-slate-200 group-hover:text-amber-300">
+                Precedent RAG
               </div>
-              <div className="text-[10px] text-slate-500">Cross-examine facts</div>
+              <div className="text-[10px] text-slate-400">Fact cross-examination</div>
             </div>
           </Link>
 
           <Link
             to={`/cases/${caseId}/vulnerability`}
-            className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-rose-500/40 hover:bg-slate-900 transition-all flex items-center gap-3 group"
+            className="p-3.5 rounded-xl bg-[#070B14]/80 border border-[#1E2B45] hover:border-rose-500/50 hover:bg-[#0D1527] transition-all flex items-center gap-3 group shadow-sm"
           >
-            <div className="p-2 rounded-lg bg-rose-500/10 text-rose-400 group-hover:scale-105 transition-transform">
-              <ShieldAlert className="w-4 h-4" />
+            <div className="p-2.5 rounded-lg bg-rose-500/10 text-rose-400 border border-rose-500/25 group-hover:scale-105 group-hover:border-rose-400/50 transition-all">
+              <ShieldAlert className="w-4 h-4 stroke-[2.2]" />
             </div>
             <div>
-              <div className="text-xs font-semibold text-slate-200 group-hover:text-rose-400">
+              <div className="text-xs font-semibold text-slate-200 group-hover:text-rose-300">
                 Vulnerabilities
               </div>
-              <div className="text-[10px] text-slate-500">
-                {reports.length} Opposing reports
+              <div className="text-[10px] text-slate-400">
+                {reports.length} Opposing analysis
               </div>
             </div>
           </Link>
 
           <Link
             to={`/cases/${caseId}/brief/new`}
-            className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-blue-500/40 hover:bg-slate-900 transition-all flex items-center gap-3 group"
+            className="p-3.5 rounded-xl bg-[#070B14]/80 border border-[#1E2B45] hover:border-blue-500/50 hover:bg-[#0D1527] transition-all flex items-center gap-3 group shadow-sm"
           >
-            <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 group-hover:scale-105 transition-transform">
-              <FileText className="w-4 h-4" />
+            <div className="p-2.5 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/25 group-hover:scale-105 group-hover:border-blue-400/50 transition-all">
+              <FileText className="w-4 h-4 stroke-[2.2]" />
             </div>
             <div>
-              <div className="text-xs font-semibold text-slate-200 group-hover:text-blue-400">
+              <div className="text-xs font-semibold text-slate-200 group-hover:text-blue-300">
                 Trial Briefs
               </div>
-              <div className="text-[10px] text-slate-500">
+              <div className="text-[10px] text-slate-400">
                 {briefs.length} IRAC outlines
               </div>
             </div>
@@ -173,16 +178,16 @@ export function CaseWorkspacePage() {
 
           <Link
             to={`/cases/${caseId}/clauses`}
-            className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-emerald-500/40 hover:bg-slate-900 transition-all flex items-center gap-3 group"
+            className="p-3.5 rounded-xl bg-[#070B14]/80 border border-[#1E2B45] hover:border-emerald-500/50 hover:bg-[#0D1527] transition-all flex items-center gap-3 group shadow-sm"
           >
-            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 group-hover:scale-105 transition-transform">
-              <Columns className="w-4 h-4" />
+            <div className="p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 group-hover:scale-105 group-hover:border-emerald-400/50 transition-all">
+              <Columns className="w-4 h-4 stroke-[2.2]" />
             </div>
             <div>
-              <div className="text-xs font-semibold text-slate-200 group-hover:text-emerald-400">
+              <div className="text-xs font-semibold text-slate-200 group-hover:text-emerald-300">
                 Clause Matrix
               </div>
-              <div className="text-[10px] text-slate-500">Compare agreements</div>
+              <div className="text-[10px] text-slate-400">Compare agreements</div>
             </div>
           </Link>
         </div>
@@ -194,11 +199,11 @@ export function CaseWorkspacePage() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-bold text-slate-100">
-              Verified Case Record ({documents.length})
+            <h2 className="text-xl font-serif font-bold text-slate-100 tracking-tight">
+              Verified Case Record ({documents.length} Evidence Documents)
             </h2>
             <p className="text-xs text-slate-400">
-              Extracted page-by-page and indexed for zero-hallucination RAG vector retrieval
+              Chunked by exact page boundaries with SHA-256 integrity and 768-dim embeddings for zero-hallucination citations.
             </p>
           </div>
 
@@ -208,7 +213,7 @@ export function CaseWorkspacePage() {
             icon={UploadCloud}
             onClick={() => navigate(`/cases/${caseId}/upload`)}
           >
-            Upload More
+            Ingest More Evidence
           </Button>
         </div>
 
@@ -225,17 +230,17 @@ export function CaseWorkspacePage() {
       {/* Trial Briefs & Opposing Vulnerability Summaries */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Trial Briefs Box */}
-        <div className="p-6 rounded-xl bg-slate-900/60 border border-slate-800 space-y-4">
+        <div className="p-6 rounded-xl legal-card space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <FileText className="w-4 h-4 text-amber-500" />
-              <h3 className="font-semibold text-slate-100 text-sm">Trial Brief Outlines</h3>
+              <h3 className="font-serif font-bold text-slate-100 text-base">Synthesized Trial Briefs</h3>
             </div>
             <Link
               to={`/cases/${caseId}/brief/new`}
-              className="text-xs font-semibold text-amber-500 hover:text-amber-400"
+              className="text-xs font-semibold text-amber-400 hover:text-amber-300"
             >
-              + Create IRAC Brief
+              + Draft New IRAC Brief
             </Link>
           </div>
 
@@ -245,19 +250,19 @@ export function CaseWorkspacePage() {
                 <Link
                   key={b.id}
                   to={`/cases/${caseId}/brief/${b.id}`}
-                  className="p-3 rounded-lg bg-slate-950/60 border border-slate-800 hover:border-amber-500/40 flex items-center justify-between transition-all"
+                  className="p-3.5 rounded-lg bg-[#070B14]/80 border border-[#1E2B45] hover:border-amber-500/40 flex items-center justify-between transition-all group"
                 >
                   <div>
-                    <div className="font-semibold text-slate-200 text-xs">{b.title}</div>
-                    <div className="text-[10px] text-slate-400">
-                      v{b.version} • {new Date(b.updated_at).toLocaleDateString()}
+                    <div className="font-serif font-semibold text-slate-200 text-sm group-hover:text-amber-300 transition-colors">{b.title}</div>
+                    <div className="text-[10px] text-slate-400 font-mono mt-0.5">
+                      v{b.version} • Updated {new Date(b.updated_at).toLocaleDateString()}
                     </div>
                   </div>
                   <span
                     className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
                       b.status === 'finalized'
-                        ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
-                        : 'bg-amber-500/15 text-amber-400 border-amber-500/30'
+                        ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/35'
+                        : 'bg-amber-500/15 text-amber-300 border-amber-500/35'
                     }`}
                   >
                     {b.status}
@@ -266,57 +271,50 @@ export function CaseWorkspacePage() {
               ))}
             </div>
           ) : (
-            <div className="text-xs text-slate-500 text-center py-6">
-              No trial briefs generated for this matter yet.
-            </div>
+            <p className="text-xs text-slate-400 italic py-2">
+              No briefs generated yet. Use the IRAC Brief Builder to synthesize an argument grounded in your case record.
+            </p>
           )}
         </div>
 
         {/* Vulnerability Reports Box */}
-        <div className="p-6 rounded-xl bg-slate-900/60 border border-slate-800 space-y-4">
+        <div className="p-6 rounded-xl legal-card space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <ShieldAlert className="w-4 h-4 text-rose-500" />
-              <h3 className="font-semibold text-slate-100 text-sm">Vulnerability Reports</h3>
+              <ShieldAlert className="w-4 h-4 text-rose-400" />
+              <h3 className="font-serif font-bold text-slate-100 text-base">Adversary Vulnerability Audits</h3>
             </div>
             <Link
               to={`/cases/${caseId}/vulnerability`}
-              className="text-xs font-semibold text-rose-400 hover:text-rose-300"
+              className="text-xs font-semibold text-amber-400 hover:text-amber-300"
             >
-              Run Detector
+              Run Audit &rarr;
             </Link>
           </div>
 
           {reports.length > 0 ? (
             <div className="space-y-2.5">
-              {reports.map((r) => {
-                const findings = typeof r.findings === 'string' ? JSON.parse(r.findings) : r.findings;
-                const count = findings?.vulnerabilities?.length || 0;
-                return (
-                  <Link
-                    key={r.id}
-                    to={`/cases/${caseId}/vulnerability`}
-                    className="p-3 rounded-lg bg-slate-950/60 border border-slate-800 hover:border-rose-500/40 flex items-center justify-between transition-all"
-                  >
-                    <div>
-                      <div className="font-semibold text-slate-200 text-xs">
-                        Adversary: {r.opposing_document_title || 'Opposing Filing'}
-                      </div>
-                      <div className="text-[10px] text-slate-400">
-                        {new Date(r.created_at).toLocaleDateString()}
-                      </div>
+              {reports.slice(0, 4).map((r) => (
+                <div
+                  key={r.id}
+                  className="p-3.5 rounded-lg bg-[#070B14]/80 border border-[#1E2B45] flex items-center justify-between"
+                >
+                  <div>
+                    <div className="font-semibold text-slate-200 text-xs truncate max-w-xs">{r.target_document_title || 'Opposing Filing'}</div>
+                    <div className="text-[10px] text-slate-400 font-mono mt-0.5">
+                      Analyzed {new Date(r.created_at).toLocaleDateString()}
                     </div>
-                    <span className="text-[10px] font-bold text-rose-400 bg-rose-950/40 border border-rose-900/60 px-2 py-0.5 rounded-full">
-                      {count} Vulnerabilit{count !== 1 ? 'ies' : 'y'}
-                    </span>
-                  </Link>
-                );
-              })}
+                  </div>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-950/40 text-rose-300 border border-rose-800/40">
+                    {(r.findings || []).length} Vulnerabilities
+                  </span>
+                </div>
+              ))}
             </div>
           ) : (
-            <div className="text-xs text-slate-500 text-center py-6">
-              No vulnerability reports run yet. Upload an opposing brief to run detection.
-            </div>
+            <p className="text-xs text-slate-400 italic py-2">
+              No vulnerability reports generated yet. Run the detector against opposing motions to find misapplied precedents and factual contradictions.
+            </p>
           )}
         </div>
       </div>

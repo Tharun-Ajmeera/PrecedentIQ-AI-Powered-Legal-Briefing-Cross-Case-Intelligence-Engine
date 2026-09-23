@@ -7,7 +7,7 @@ import { AuditFilterBar } from '../components/audit/AuditFilterBar';
 import { RoleGuard } from '../components/layout/RoleGuard';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
 import { ErrorBanner } from '../components/common/ErrorBanner';
-import { History, ChevronLeft, ShieldCheck } from 'lucide-react';
+import { History, ChevronLeft, ShieldCheck, Lock } from 'lucide-react';
 
 export function AuditPage() {
   const { caseId } = useParams();
@@ -55,12 +55,12 @@ export function AuditPage() {
 
   return (
     <RoleGuard allowedRoles={['attorney', 'compliance_officer']}>
-      <div className="p-8 max-w-6xl mx-auto space-y-6">
+      <div className="p-6 sm:p-10 max-w-6xl mx-auto space-y-7">
         <div className="flex items-center justify-between">
           {caseId ? (
             <Link
               to={`/cases/${caseId}`}
-              className="text-xs text-slate-400 hover:text-amber-400 flex items-center gap-1 transition-colors"
+              className="text-xs text-slate-400 hover:text-amber-400 flex items-center gap-1.5 transition-colors font-mono uppercase tracking-wider"
             >
               <ChevronLeft className="w-4 h-4" />
               <span>Back to Matter Workspace</span>
@@ -68,26 +68,29 @@ export function AuditPage() {
           ) : (
             <Link
               to="/dashboard"
-              className="text-xs text-slate-400 hover:text-amber-400 flex items-center gap-1 transition-colors"
+              className="text-xs text-slate-400 hover:text-amber-400 flex items-center gap-1.5 transition-colors font-mono uppercase tracking-wider"
             >
               <ChevronLeft className="w-4 h-4" />
-              <span>Back to Dashboard</span>
+              <span>Back to Master Docket</span>
             </Link>
           )}
 
-          <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
-            <ShieldCheck className="w-4 h-4" />
-            <span>Append-Only Compliance Ledger</span>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-950/40 border border-emerald-800/60 text-emerald-400 text-xs font-mono">
+            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <span>Append-Only Forensic Ledger</span>
           </div>
         </div>
 
         <div>
-          <h1 className="text-2xl font-bold text-slate-100 tracking-tight flex items-center gap-2.5">
-            <History className="w-6 h-6 text-amber-500" />
-            <span>Compliance Audit Trail & Chain of Custody</span>
+          <div className="text-amber-500 font-mono text-xs uppercase tracking-widest mb-1">
+            Institutional Governance & Chain of Custody
+          </div>
+          <h1 className="text-3xl font-serif font-bold text-slate-100 tracking-tight flex items-center gap-3">
+            <History className="w-7 h-7 text-amber-500" />
+            <span>Forensic Audit Ledger</span>
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
-            Immutable forensic log of all document uploads, vector ingestion cycles, RAG research inquiries, and brief finalizations.
+          <p className="text-sm text-slate-400 mt-1.5 leading-relaxed max-w-3xl">
+            Cryptographically timestamped audit trail of all evidentiary uploads, vector indexing jobs, partner IRAC brief certifications, and AI legal queries.
           </p>
         </div>
 
@@ -102,7 +105,7 @@ export function AuditPage() {
 
         {/* Audit Table */}
         {loading ? (
-          <LoadingSpinner text="Retrieving cryptographic audit logs..." />
+          <LoadingSpinner text="Retrieving cryptographic audit trail..." />
         ) : (
           <AuditLogTable logs={logs} />
         )}

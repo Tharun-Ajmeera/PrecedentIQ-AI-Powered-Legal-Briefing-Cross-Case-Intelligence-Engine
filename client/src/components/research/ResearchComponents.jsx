@@ -160,26 +160,26 @@ export function GroundedAnswerCard({ queryResult }) {
   };
 
   return (
-    <div className="p-6 rounded-xl bg-slate-900/80 border border-slate-800 shadow-xl space-y-4">
+    <div className="p-6 rounded-2xl legal-card space-y-4">
       {/* Verification Status Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-            Grounded Research Response
+      <div className="flex items-center justify-between pb-3.5 border-b border-[#1E2B45]">
+        <div className="flex items-center gap-2.5">
+          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-300">
+            Grounded Precedent Record
           </span>
           <span
-            className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+            className={`text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border shadow-sm ${
               queryResult.citationVerified
-                ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
-                : 'bg-rose-500/15 text-rose-400 border-rose-500/30'
+                ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/35'
+                : 'bg-rose-500/15 text-rose-300 border-rose-500/35'
             }`}
           >
-            {queryResult.citationVerified ? 'All Citations Verified' : 'Unverified Citations Flagged'}
+            {queryResult.citationVerified ? '✓ All Citations Verified' : '⚠ Unverified Claims Flagged'}
           </span>
         </div>
 
         {queryResult.createdAt && (
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-slate-400 font-mono">
             {new Date(queryResult.createdAt).toLocaleTimeString()}
           </span>
         )}
@@ -187,7 +187,7 @@ export function GroundedAnswerCard({ queryResult }) {
 
       <UnverifiedClaimWarning unverifiedCount={queryResult.unverifiedCitations?.length || 0} />
 
-      {/* Answer Body */}
+      {/* Answer Body in Executive Serif */}
       <div className="text-slate-100 text-sm leading-relaxed legal-document-view whitespace-pre-wrap">
         {renderFormattedAnswer(queryResult.answer, [
           ...(queryResult.citations || []),
@@ -197,8 +197,8 @@ export function GroundedAnswerCard({ queryResult }) {
 
       {/* Verified Citations Shelf */}
       {queryResult.citations && queryResult.citations.length > 0 && (
-        <div className="mt-4 pt-4 border-t border-slate-800/60">
-          <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+        <div className="mt-4 pt-4 border-t border-[#1E2B45]">
+          <div className="text-[11px] font-mono font-semibold uppercase tracking-wider text-amber-400/90 mb-2">
             Verified Source Authorities ({queryResult.citations.length}):
           </div>
           <div className="flex flex-wrap gap-2">
@@ -211,10 +211,10 @@ export function GroundedAnswerCard({ queryResult }) {
 
       {/* Grounding Source Chunks Drawer */}
       {queryResult.retrievedChunks && queryResult.retrievedChunks.length > 0 && (
-        <div className="mt-4 pt-3 border-t border-slate-800/60">
+        <div className="mt-4 pt-3 border-t border-[#1E2B45]">
           <button
             onClick={() => setShowChunks(!showChunks)}
-            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-amber-400 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-amber-300 transition-colors cursor-pointer font-mono"
           >
             <Layers className="w-3.5 h-3.5" />
             <span>
@@ -226,24 +226,24 @@ export function GroundedAnswerCard({ queryResult }) {
           </button>
 
           {showChunks && (
-            <div className="mt-3 space-y-2.5 max-h-60 overflow-y-auto pr-1">
+            <div className="mt-3 space-y-2.5 max-h-64 overflow-y-auto pr-1">
               {queryResult.retrievedChunks.map((chunk, idx) => (
                 <div
                   key={idx}
-                  className="p-3 rounded-lg bg-slate-950/60 border border-slate-800 text-xs space-y-1"
+                  className="p-3 rounded-lg bg-[#070B14] border border-[#1E2B45] text-xs space-y-1"
                 >
-                  <div className="flex items-center justify-between text-slate-400">
+                  <div className="flex items-center justify-between text-slate-400 font-mono text-[11px]">
                     <span className="font-semibold text-slate-200">
                       {chunk.documentTitle} • Page {chunk.pageNumber}
                     </span>
                     {chunk.distance !== undefined && (
-                      <span className="text-[10px] text-amber-500 font-mono">
+                      <span className="text-[10px] text-amber-400 font-mono">
                         dist: {Number(chunk.distance).toFixed(4)}
                       </span>
                     )}
                   </div>
-                  <p className="text-slate-300 font-mono leading-relaxed line-clamp-3">
-                    {chunk.content}
+                  <p className="text-slate-300 font-serif italic text-xs leading-relaxed">
+                    "{chunk.content}"
                   </p>
                 </div>
               ))}
@@ -278,90 +278,115 @@ export function QueryInputBar({ onSearch, loading, documents = [] }) {
     );
   };
 
+  const samplePrompts = [
+    'Analyze breach of express warranty claims in the agreements',
+    'What are the strict product liability precedents cited?',
+    'Identify conflicting deposition statements regarding equipment inspection',
+  ];
+
   return (
-    <form onSubmit={handleSubmit} className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
-      <div className="flex items-center gap-2">
-        <div className="relative flex-1">
-          <Search className="w-4 h-4 text-slate-500 absolute left-3 top-3.5" />
-          <input
-            type="text"
-            required
-            minLength={5}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Ask a legal research question strictly grounded in the case record..."
-            className="w-full pl-9 pr-4 py-2.5 bg-slate-950 border border-slate-700/80 rounded-lg text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
-          />
-        </div>
-
-        <Button type="submit" variant="primary" loading={loading} icon={Sparkles}>
-          Query Record
-        </Button>
-      </div>
-
-      <div className="flex flex-wrap items-center justify-between gap-3 text-xs pt-1">
-        <div className="flex items-center gap-2">
-          <span className="text-slate-400 font-medium">Research Mode:</span>
-          <select
-            value={mode}
-            onChange={(e) => setMode(e.target.value)}
-            className="px-2.5 py-1 rounded bg-slate-950 border border-slate-700 text-slate-200 text-xs focus:ring-1 focus:ring-amber-500"
+    <div className="space-y-3">
+      {/* Quick Inquiries */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+        <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider flex-shrink-0">
+          Suggested Inquiries:
+        </span>
+        {samplePrompts.map((p, idx) => (
+          <button
+            key={idx}
+            type="button"
+            onClick={() => setQuery(p)}
+            className="flex-shrink-0 px-2.5 py-1 rounded-full bg-[#0D1527] hover:bg-amber-500/10 border border-[#1E2B45] hover:border-amber-500/40 text-slate-300 hover:text-amber-300 text-[11px] transition-colors cursor-pointer truncate max-w-xs"
           >
-            <option value="general_research">General Research</option>
-            <option value="precedent_lookup">Precedent Holding Lookup</option>
-            <option value="cross_reference">Cross-Document Witness/Fact Cross-Ref</option>
-          </select>
+            "{p}"
+          </button>
+        ))}
+      </div>
+
+      <form onSubmit={handleSubmit} className="legal-card p-4 rounded-2xl space-y-3">
+        <div className="flex items-center gap-2.5">
+          <div className="relative flex-1">
+            <Search className="w-4 h-4 text-amber-500 absolute left-3.5 top-3.5" />
+            <input
+              type="text"
+              required
+              minLength={5}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Inquire across case record with zero-hallucination citation guarantee..."
+              className="w-full pl-10 pr-4 py-2.5 bg-[#070B14] border border-[#1E2B45] rounded-xl text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/60 transition-all font-sans"
+            />
+          </div>
+
+          <Button type="submit" variant="primary" loading={loading} icon={Sparkles}>
+            Query Record
+          </Button>
         </div>
 
-        {documents.length > 0 && (
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setShowScopePicker(!showScopePicker)}
-              className="px-2.5 py-1 rounded bg-slate-950 border border-slate-700 text-slate-300 hover:text-amber-400 text-xs flex items-center gap-1.5"
+        <div className="flex flex-wrap items-center justify-between gap-3 text-xs pt-1 border-t border-[#1E2B45]/70">
+          <div className="flex items-center gap-2">
+            <span className="text-slate-400 font-mono text-[11px]">Research Mode:</span>
+            <select
+              value={mode}
+              onChange={(e) => setMode(e.target.value)}
+              className="px-2.5 py-1 rounded-lg bg-[#070B14] border border-[#1E2B45] text-amber-400/90 text-xs font-medium focus:ring-1 focus:ring-amber-500 cursor-pointer"
             >
-              <span>
-                Scope: {selectedDocs.length === 0 ? 'All Documents' : `${selectedDocs.length} Selected`}
-              </span>
-              <ChevronDown className="w-3 h-3" />
-            </button>
-
-            {showScopePicker && (
-              <div className="absolute right-0 bottom-8 w-64 p-3 rounded-xl bg-slate-950 border border-slate-800 shadow-2xl z-30 space-y-2">
-                <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider pb-1 border-b border-slate-800">
-                  Select Grounding Scope:
-                </div>
-                <div className="max-h-48 overflow-y-auto space-y-1">
-                  {documents.map((doc) => (
-                    <label
-                      key={doc.id}
-                      className="flex items-center gap-2 text-xs text-slate-300 hover:bg-slate-900 p-1.5 rounded cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedDocs.includes(doc.id)}
-                        onChange={() => toggleDocSelection(doc.id)}
-                        className="rounded border-slate-700 text-amber-500 focus:ring-amber-500"
-                      />
-                      <span className="truncate">{doc.title}</span>
-                    </label>
-                  ))}
-                </div>
-                {selectedDocs.length > 0 && (
-                  <button
-                    type="button"
-                    onClick={() => setSelectedDocs([])}
-                    className="text-[11px] text-amber-400 hover:underline w-full text-right"
-                  >
-                    Reset to All Documents
-                  </button>
-                )}
-              </div>
-            )}
+              <option value="general_research">General Precedent Research</option>
+              <option value="precedent_lookup">Precedent Holding Lookup</option>
+              <option value="cross_reference">Cross-Document Witness/Fact Cross-Ref</option>
+            </select>
           </div>
-        )}
-      </div>
-    </form>
+
+          {documents.length > 0 && (
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setShowScopePicker(!showScopePicker)}
+                className="px-2.5 py-1 rounded-lg bg-[#070B14] border border-[#1E2B45] text-slate-300 hover:text-amber-400 text-xs flex items-center gap-1.5 cursor-pointer font-mono"
+              >
+                <span>
+                  Corpus Scope: {selectedDocs.length === 0 ? 'All Documents' : `${selectedDocs.length} Selected`}
+                </span>
+                <ChevronDown className="w-3 h-3" />
+              </button>
+
+              {showScopePicker && (
+                <div className="absolute right-0 bottom-8 w-72 p-3.5 rounded-xl bg-[#070B14] border border-[#1E2B45] shadow-2xl z-30 space-y-2">
+                  <div className="text-[11px] font-mono font-semibold text-slate-400 uppercase tracking-wider pb-1.5 border-b border-[#1E2B45]">
+                    Select Grounding Scope:
+                  </div>
+                  <div className="max-h-48 overflow-y-auto space-y-1">
+                    {documents.map((doc) => (
+                      <label
+                        key={doc.id}
+                        className="flex items-center gap-2 text-xs text-slate-300 hover:bg-[#131C31] p-1.5 rounded cursor-pointer"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedDocs.includes(doc.id)}
+                          onChange={() => toggleDocSelection(doc.id)}
+                          className="rounded border-[#1E2B45] text-amber-500 focus:ring-amber-500"
+                        />
+                        <span className="truncate">{doc.title}</span>
+                      </label>
+                    ))}
+                  </div>
+                  {selectedDocs.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => setSelectedDocs([])}
+                      className="text-[11px] text-amber-400 hover:underline w-full text-right cursor-pointer"
+                    >
+                      Reset to Entire Matter Corpus
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </form>
+    </div>
   );
 }
 

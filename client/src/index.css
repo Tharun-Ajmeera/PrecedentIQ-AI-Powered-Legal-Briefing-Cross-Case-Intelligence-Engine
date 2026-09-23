@@ -6,42 +6,88 @@
 
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100 font-sans;
+    background-color: #070B14;
+    color: #F1F5F9;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, .font-legal-title {
+    letter-spacing: -0.015em;
   }
 }
 
-/* Custom Scrollbar for legal documents and matrices */
+/* Executive Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b1120;
+  background: #070B14;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #1E2B45;
   border-radius: 9999px;
+  border: 1px solid rgba(217, 119, 6, 0.15);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #D97706;
 }
 
-/* Legal brief document formatting */
+/* Legal Brief & Judicial Document Formatting */
 .legal-document-view {
-  font-family: 'Merriweather', Georgia, serif;
-  line-height: 1.8;
+  font-family: 'Playfair Display', Georgia, serif;
+  line-height: 1.85;
+  letter-spacing: 0.005em;
 }
 
+.legal-document-view p {
+  margin-bottom: 1.25rem;
+  text-align: justify;
+}
+
+.legal-document-view h1,
 .legal-document-view h2,
 .legal-document-view h3 {
-  font-family: 'Inter', sans-serif;
-  letter-spacing: -0.01em;
+  font-family: 'Playfair Display', Georgia, serif;
+  color: #F8FAFC;
+  letter-spacing: -0.02em;
 }
 
-/* Glassmorphism accents */
-.glass-panel {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(51, 65, 85, 0.4);
+/* Executive Glass & Card Styling */
+.legal-card {
+  background: linear-gradient(135deg, rgba(13, 21, 39, 0.95) 0%, rgba(10, 16, 30, 0.90) 100%);
+  border: 1px solid rgba(30, 43, 69, 0.8);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.45);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.legal-card:hover {
+  border-color: rgba(217, 119, 6, 0.35);
+  box-shadow: 0 8px 30px -4px rgba(217, 119, 6, 0.08), 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+}
+
+.legal-glass {
+  background: rgba(13, 21, 39, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(30, 43, 69, 0.6);
+}
+
+.gold-glow {
+  box-shadow: 0 0 25px -5px rgba(217, 119, 6, 0.25);
+}
+
+.gold-border-glow {
+  border-color: rgba(217, 119, 6, 0.5);
+  box-shadow: 0 0 15px -3px rgba(217, 119, 6, 0.2);
+}
+
+/* Formal Legal Citation Chip */
+.citation-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: -0.02em;
 }

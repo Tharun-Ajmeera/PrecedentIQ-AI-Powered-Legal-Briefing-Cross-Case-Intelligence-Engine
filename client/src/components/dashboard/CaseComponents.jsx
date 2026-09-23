@@ -12,21 +12,21 @@ export function CaseCard({ legalCase, onDelete }) {
   const { user } = useAuth();
 
   return (
-    <div className="group relative rounded-xl bg-slate-900/70 border border-slate-800 p-5 hover:border-amber-500/50 hover:bg-slate-900 transition-all shadow-lg flex flex-col justify-between">
+    <div className="group relative rounded-xl legal-card p-5 flex flex-col justify-between">
       <div>
         <div className="flex items-start justify-between gap-3">
-          <div className="p-2.5 rounded-lg bg-amber-500/10 text-amber-500 border border-amber-500/20 group-hover:scale-105 transition-transform">
-            <Scale className="w-5 h-5" />
+          <div className="p-2.5 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/25 group-hover:scale-105 group-hover:border-amber-400/50 transition-all shadow-sm shadow-amber-950/20">
+            <Scale className="w-5 h-5 stroke-[2.2]" />
           </div>
           <div className="flex items-center gap-2">
             <span
-              className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+              className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border shadow-sm ${
                 legalCase.status === 'active'
-                  ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
-                  : 'bg-slate-700/50 text-slate-400 border-slate-600'
+                  ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/35'
+                  : 'bg-slate-800 text-slate-400 border-slate-700'
               }`}
             >
-              {legalCase.status}
+              {legalCase.status || 'Active'}
             </span>
             {user?.role === 'attorney' && onDelete && (
               <button
@@ -36,8 +36,8 @@ export function CaseCard({ legalCase, onDelete }) {
                     onDelete(legalCase.id);
                   }
                 }}
-                className="text-slate-500 hover:text-rose-400 p-1 rounded hover:bg-rose-950/30 transition-colors"
-                title="Delete Case"
+                className="text-slate-500 hover:text-rose-400 p-1 rounded hover:bg-rose-950/30 transition-colors cursor-pointer"
+                title="Delete Matter"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -45,39 +45,45 @@ export function CaseCard({ legalCase, onDelete }) {
           </div>
         </div>
 
-        <h3 className="mt-4 text-base font-semibold text-slate-100 group-hover:text-amber-400 transition-colors line-clamp-2">
+        <h3 className="mt-4 font-serif text-lg font-bold text-slate-100 group-hover:text-amber-300 transition-colors line-clamp-2 tracking-tight">
           {legalCase.title}
         </h3>
 
         {legalCase.matter_number && (
-          <div className="mt-1 text-xs font-mono text-slate-400">
-            Matter #{legalCase.matter_number}
+          <div className="mt-1 text-xs font-mono text-amber-400/80 tracking-wide">
+            Docket #{legalCase.matter_number}
           </div>
         )}
 
-        <div className="mt-4 pt-3 border-t border-slate-800/80 grid grid-cols-2 gap-2 text-xs text-slate-400">
-          <div className="flex items-center gap-1.5">
-            <Folder className="w-3.5 h-3.5 text-slate-500" />
-            <span>{legalCase.document_count || 0} Documents</span>
+        {legalCase.description && (
+          <p className="mt-2 text-xs text-slate-400 line-clamp-2 leading-relaxed">
+            {legalCase.description}
+          </p>
+        )}
+
+        <div className="mt-4 pt-3.5 border-t border-[#1E2B45] grid grid-cols-2 gap-2 text-xs text-slate-300">
+          <div className="flex items-center gap-2 bg-[#070B14]/60 px-2.5 py-1.5 rounded border border-[#1E2B45]">
+            <Folder className="w-3.5 h-3.5 text-amber-500/80" />
+            <span className="font-mono text-xs">{legalCase.document_count || 0} Docs</span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <FileText className="w-3.5 h-3.5 text-slate-500" />
-            <span>{legalCase.brief_count || 0} Briefs</span>
+          <div className="flex items-center gap-2 bg-[#070B14]/60 px-2.5 py-1.5 rounded border border-[#1E2B45]">
+            <FileText className="w-3.5 h-3.5 text-amber-500/80" />
+            <span className="font-mono text-xs">{legalCase.brief_count || 0} Briefs</span>
           </div>
         </div>
       </div>
 
-      <div className="mt-5 pt-3 border-t border-slate-800/60 flex items-center justify-between">
-        <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
-          <Calendar className="w-3.5 h-3.5" />
-          <span>{new Date(legalCase.created_at).toLocaleDateString()}</span>
+      <div className="mt-5 pt-3.5 border-t border-[#1E2B45] flex items-center justify-between">
+        <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-mono">
+          <Calendar className="w-3.5 h-3.5 text-slate-500" />
+          <span>{new Date(legalCase.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
         </div>
 
         <Link
           to={`/cases/${legalCase.id}`}
-          className="inline-flex items-center gap-1 text-xs font-semibold text-amber-500 group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-400 group-hover:text-amber-300 group-hover:translate-x-1 transition-all"
         >
-          <span>Open Matter</span>
+          <span>Enter Workspace</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
       </div>

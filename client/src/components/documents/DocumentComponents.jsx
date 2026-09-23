@@ -129,10 +129,10 @@ export function DocumentUploadForm({ caseId, onUploadSuccess }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 rounded-xl bg-slate-900/60 border border-slate-800 space-y-5">
+    <form onSubmit={handleSubmit} className="legal-card p-6 rounded-2xl space-y-5">
       {error && <ErrorBanner message={error} onDismiss={() => setError(null)} />}
 
-      {/* Drag & Drop Upload Zone */}
+      {/* Luxury Dropzone */}
       <div
         onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
         onDragLeave={() => setDragActive(false)}
@@ -141,12 +141,12 @@ export function DocumentUploadForm({ caseId, onUploadSuccess }) {
           setDragActive(false);
           if (e.dataTransfer.files?.[0]) handleFileChange(e.dataTransfer.files[0]);
         }}
-        className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-colors ${
+        className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all ${
           dragActive
             ? 'border-amber-500 bg-amber-500/10'
             : file
-            ? 'border-emerald-600/80 bg-emerald-950/20'
-            : 'border-slate-700/80 hover:border-amber-500/50 hover:bg-slate-850/50'
+            ? 'border-emerald-500/60 bg-emerald-950/20'
+            : 'border-[#1E2B45] hover:border-amber-500/50 bg-[#070B14]/70 hover:bg-[#0D1527]'
         }`}
         onClick={() => document.getElementById('file-upload-input').click()}
       >
@@ -157,20 +157,20 @@ export function DocumentUploadForm({ caseId, onUploadSuccess }) {
           className="hidden"
           onChange={(e) => handleFileChange(e.target.files[0])}
         />
-        <UploadCloud className="w-10 h-10 mx-auto text-amber-500 mb-2" />
+        <UploadCloud className="w-10 h-10 mx-auto text-amber-500 mb-2 stroke-[1.8]" />
         {file ? (
           <div>
-            <div className="font-semibold text-slate-100">{file.name}</div>
-            <div className="text-xs text-emerald-400 mt-1">
-              {(file.size / (1024 * 1024)).toFixed(2)} MB • Ready for ingestion
+            <div className="font-serif font-bold text-slate-100 text-base">{file.name}</div>
+            <div className="text-xs text-emerald-400 font-mono mt-1">
+              {(file.size / (1024 * 1024)).toFixed(2)} MB • Ready for ingestion & vector indexing
             </div>
           </div>
         ) : (
           <div>
             <div className="text-sm font-semibold text-slate-200">
-              Click to select or drag and drop legal document
+              Select or drag and drop legal evidence document
             </div>
-            <div className="text-xs text-slate-500 mt-1">
+            <div className="text-xs text-slate-400 mt-1">
               Supports court PDF, Word DOCX, and TXT files (Max 50MB)
             </div>
           </div>
@@ -179,7 +179,7 @@ export function DocumentUploadForm({ caseId, onUploadSuccess }) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+          <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5 font-mono">
             Document Title *
           </label>
           <input
@@ -188,30 +188,30 @@ export function DocumentUploadForm({ caseId, onUploadSuccess }) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="e.g. Master Services Agreement (2023)"
-            className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="w-full px-3.5 py-2 bg-[#0D1527] border border-[#1E2B45] rounded-lg text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/60 transition-all"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+          <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5 font-mono">
             Document Category *
           </label>
           <select
             value={documentType}
             onChange={(e) => setDocumentType(e.target.value)}
-            className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="w-full px-3.5 py-2 bg-[#0D1527] border border-[#1E2B45] rounded-lg text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/60 transition-all cursor-pointer"
           >
-            <option value="case_file">Case File (General Materials)</option>
-            <option value="judicial_opinion">Judicial Opinion (Precedent)</option>
-            <option value="deposition_transcript">Deposition Transcript (Testimony)</option>
-            <option value="contract">Contract / Commercial Agreement</option>
-            <option value="opposing_filing">Opposing Filing (Adversary Motion/Brief)</option>
-            <option value="statute_regulation">Statute / Regulatory Code</option>
+            <option value="case_file">📁 Case File (General Materials)</option>
+            <option value="judicial_opinion">⚖️ Judicial Opinion (Precedent)</option>
+            <option value="deposition_transcript">👥 Deposition Transcript (Testimony)</option>
+            <option value="contract">📜 Contract / Commercial Agreement</option>
+            <option value="opposing_filing">🛡️ Opposing Filing (Adversary Motion/Brief)</option>
+            <option value="statute_regulation">📖 Statute / Regulatory Code</option>
           </select>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+          <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5 font-mono">
             Jurisdiction / Venue (Optional)
           </label>
           <input
@@ -219,18 +219,18 @@ export function DocumentUploadForm({ caseId, onUploadSuccess }) {
             value={jurisdiction}
             onChange={(e) => setJurisdiction(e.target.value)}
             placeholder="e.g. Delaware Chancery Court, 9th Cir."
-            className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="w-full px-3.5 py-2 bg-[#0D1527] border border-[#1E2B45] rounded-lg text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/60 transition-all"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+          <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5 font-mono">
             Confidentiality Designation
           </label>
           <select
             value={confidentialityTag}
             onChange={(e) => setConfidentialityTag(e.target.value)}
-            className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="w-full px-3.5 py-2 bg-[#0D1527] border border-[#1E2B45] rounded-lg text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/60 transition-all cursor-pointer"
           >
             <option value="privileged">Attorney-Client Privileged</option>
             <option value="work_product">Attorney Work Product</option>
@@ -239,7 +239,7 @@ export function DocumentUploadForm({ caseId, onUploadSuccess }) {
         </div>
       </div>
 
-      <div className="flex justify-end pt-3 border-t border-slate-800">
+      <div className="flex justify-end pt-3 border-t border-[#1E2B45]">
         <Button type="submit" variant="primary" loading={uploading} icon={UploadCloud}>
           Upload & Index for RAG
         </Button>
@@ -253,7 +253,7 @@ export function DocumentList({ documents, onDelete, onUpdate, caseId }) {
 
   if (!documents || documents.length === 0) {
     return (
-      <div className="p-8 text-center text-slate-500 bg-slate-900/40 rounded-xl border border-dashed border-slate-800">
+      <div className="p-8 text-center text-slate-500 bg-[#070B14]/60 rounded-xl border border-dashed border-[#1E2B45]">
         No legal documents have been ingested into this matter yet.
       </div>
     );
@@ -271,31 +271,31 @@ export function DocumentList({ documents, onDelete, onUpdate, caseId }) {
   };
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-slate-800 bg-slate-900/60">
+    <div className="overflow-x-auto rounded-xl border border-[#1E2B45] bg-[#0D1527]/90 shadow-lg">
       <table className="w-full text-left text-sm text-slate-300">
-        <thead className="bg-slate-900/90 text-xs font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-800">
+        <thead className="bg-[#070B14] text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-400 border-b border-[#1E2B45]">
           <tr>
             <th className="py-3.5 px-4">Title</th>
             <th className="py-3.5 px-4">Category</th>
             <th className="py-3.5 px-4">Jurisdiction</th>
-            <th className="py-3.5 px-4">Confidentiality</th>
+            <th className="py-3.5 px-4">Designation</th>
             <th className="py-3.5 px-4">Pages</th>
             <th className="py-3.5 px-4">Ingestion Status</th>
             <th className="py-3.5 px-4 text-right">Actions</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-800/80">
+        <tbody className="divide-y divide-[#1E2B45]/80">
           {documents.map((doc) => (
-            <tr key={doc.id} className="hover:bg-slate-850/50 transition-colors">
-              <td className="py-3 px-4 font-medium text-slate-100 flex items-center gap-2">
-                <FileText className="w-4 h-4 text-slate-400 flex-shrink-0" />
+            <tr key={doc.id} className="hover:bg-[#131C31]/60 transition-colors">
+              <td className="py-3.5 px-4 font-serif font-medium text-slate-100 flex items-center gap-2.5">
+                <FileText className="w-4 h-4 text-amber-500/80 flex-shrink-0" />
                 <span className="truncate max-w-xs">{doc.title}</span>
               </td>
               <td className="py-3 px-4">
                 <select
                   value={doc.document_type || 'case_file'}
                   onChange={(e) => handleTypeChange(doc, e.target.value)}
-                  className="bg-slate-900 border border-slate-700/80 rounded-lg px-2.5 py-1 text-xs text-slate-200 font-medium focus:outline-none focus:ring-1 focus:ring-amber-500 cursor-pointer hover:border-amber-500/50 transition-colors"
+                  className="bg-[#070B14] border border-[#1E2B45] rounded-lg px-2.5 py-1 text-xs text-amber-400/90 font-medium focus:outline-none focus:ring-1 focus:ring-amber-500 cursor-pointer hover:border-amber-500/50 transition-colors"
                   title="Click to change document category"
                 >
                   <option value="case_file">📁 Case File (General)</option>
@@ -309,10 +309,12 @@ export function DocumentList({ documents, onDelete, onUpdate, caseId }) {
               <td className="py-3 px-4 text-xs text-slate-400">
                 {doc.jurisdiction || '—'}
               </td>
-              <td className="py-3 px-4 text-xs font-mono uppercase text-slate-400">
-                {doc.confidentiality_tag?.replace('_', ' ')}
+              <td className="py-3 px-4 text-[11px] font-mono uppercase text-slate-400">
+                <span className="px-2 py-0.5 rounded bg-[#070B14] border border-[#1E2B45] text-slate-300">
+                  {doc.confidentiality_tag?.replace('_', ' ')}
+                </span>
               </td>
-              <td className="py-3 px-4 text-xs text-slate-300">
+              <td className="py-3 px-4 text-xs text-slate-300 font-mono">
                 {doc.page_count} pg{doc.page_count !== 1 ? 's' : ''}
               </td>
               <td className="py-3 px-4">
@@ -327,7 +329,7 @@ export function DocumentList({ documents, onDelete, onUpdate, caseId }) {
                     onClick={() => {
                       if (confirm(`Delete document "${doc.title}"?`)) onDelete(doc.id);
                     }}
-                    className="text-slate-500 hover:text-rose-400 p-1"
+                    className="text-slate-500 hover:text-rose-400 p-1 rounded hover:bg-rose-950/30 transition-colors cursor-pointer"
                     title="Delete Document"
                   >
                     <Trash2 className="w-4 h-4" />

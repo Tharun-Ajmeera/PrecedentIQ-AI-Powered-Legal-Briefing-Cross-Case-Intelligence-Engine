@@ -177,24 +177,27 @@ export function BriefBuilderPage() {
     : null;
 
   return (
-    <div className="p-8 max-w-5xl mx-auto space-y-6">
+    <div className="p-6 sm:p-10 max-w-5xl mx-auto space-y-7">
       <div className="flex items-center justify-between">
         <Link
           to={`/cases/${caseId}`}
-          className="text-xs text-slate-400 hover:text-amber-400 flex items-center gap-1 transition-colors"
+          className="text-xs text-slate-400 hover:text-amber-400 flex items-center gap-1.5 transition-colors font-mono uppercase tracking-wider"
         >
           <ChevronLeft className="w-4 h-4" />
-          <span>Back to Matter Workspace</span>
+          <span>Return to Matter Workspace</span>
         </Link>
       </div>
 
       <div>
-        <h1 className="text-2xl font-bold text-slate-100 tracking-tight flex items-center gap-2.5">
-          <FileText className="w-6 h-6 text-amber-500" />
+        <div className="text-amber-500 font-mono text-xs uppercase tracking-widest mb-1">
+          Appellate & Trial Briefing Studio
+        </div>
+        <h1 className="text-3xl font-serif font-bold text-slate-100 tracking-tight flex items-center gap-3">
+          <FileText className="w-7 h-7 text-amber-500" />
           <span>Interactive IRAC Trial Brief Builder</span>
         </h1>
-        <p className="text-xs text-slate-400 mt-1">
-          Synthesize structured court briefs (Issue, Rule, Analysis, Conclusion). Every applicable rule is anchored by verifiable page-level citations from the case record.
+        <p className="text-sm text-slate-400 mt-1.5 leading-relaxed font-sans max-w-3xl">
+          Synthesize structured court briefs structured strictly under the IRAC legal methodology (Issue, Rule, Analysis, Conclusion). Every asserted rule is anchored by verifiable page-level citations from the certified case record.
         </p>
       </div>
 
@@ -202,9 +205,11 @@ export function BriefBuilderPage() {
 
       {/* Creation Mode */}
       {isCreatingNew ? (
-        <form onSubmit={handleGenerateBrief} className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-6 shadow-xl">
+        <form onSubmit={handleGenerateBrief} className="legal-card p-7 sm:p-8 rounded-2xl bg-slate-900/80 border border-slate-800/90 space-y-7 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-slate-300 uppercase tracking-widest mb-2 font-mono">
               Trial Brief Document Title *
             </label>
             <input
@@ -213,19 +218,19 @@ export function BriefBuilderPage() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Plaintiff's Memorandum of Law in Support of Preliminary Injunction"
-              className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-slate-100 text-sm focus:ring-2 focus:ring-amber-500"
+              className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-slate-100 text-sm focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 font-serif"
             />
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-300 uppercase tracking-widest font-mono">
                 Legal Issues to Brief (IRAC Modules) *
               </label>
               <button
                 type="button"
                 onClick={handleAddIssue}
-                className="text-xs text-amber-500 hover:text-amber-400 font-semibold flex items-center gap-1"
+                className="text-xs text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 transition-all font-mono"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Issue Statement</span>
@@ -233,8 +238,8 @@ export function BriefBuilderPage() {
             </div>
 
             {issueStatements.map((stmt, idx) => (
-              <div key={idx} className="flex items-start gap-2">
-                <span className="text-xs font-mono text-slate-500 mt-2.5 w-6 text-right">
+              <div key={idx} className="flex items-start gap-3">
+                <span className="text-xs font-serif font-bold text-amber-400/80 mt-3 w-6 text-right">
                   {idx + 1}.
                 </span>
                 <textarea
@@ -243,13 +248,13 @@ export function BriefBuilderPage() {
                   value={stmt}
                   onChange={(e) => handleIssueChange(idx, e.target.value)}
                   placeholder="State the legal issue question to analyze..."
-                  className="flex-1 p-2 bg-slate-950 border border-slate-700 rounded-lg text-slate-100 text-sm focus:ring-2 focus:ring-amber-500"
+                  className="flex-1 p-3 bg-slate-950/80 border border-slate-800 rounded-xl text-slate-100 text-sm focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
                 />
                 {issueStatements.length > 1 && (
                   <button
                     type="button"
                     onClick={() => handleRemoveIssue(idx)}
-                    className="p-2 text-slate-500 hover:text-rose-400 mt-1"
+                    className="p-2.5 text-slate-500 hover:text-rose-400 mt-1 rounded-lg hover:bg-rose-500/10 transition-colors"
                     title="Remove Issue"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -260,37 +265,43 @@ export function BriefBuilderPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-slate-300 uppercase tracking-widest mb-2.5 font-mono">
               Select Source Documents for Grounding (Required)
             </label>
-            <div className="max-h-56 overflow-y-auto space-y-1.5 p-3 rounded-lg bg-slate-950 border border-slate-800">
-              {documents.map((doc) => (
-                <label
-                  key={doc.id}
-                  className="flex items-center gap-2.5 text-xs text-slate-300 hover:bg-slate-900 p-2 rounded cursor-pointer"
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedDocIds.includes(doc.id)}
-                    onChange={() =>
-                      setSelectedDocIds((prev) =>
-                        prev.includes(doc.id)
-                          ? prev.filter((id) => id !== doc.id)
-                          : [...prev, doc.id]
-                      )
-                    }
-                    className="rounded border-slate-700 text-amber-500 focus:ring-amber-500"
-                  />
-                  <span className="font-medium text-slate-200">{doc.title}</span>
-                  <span className="text-slate-500 text-[10px] ml-auto uppercase font-mono">
-                    {doc.document_type?.replace('_', ' ')}
-                  </span>
-                </label>
-              ))}
+            <div className="max-h-60 overflow-y-auto space-y-2 p-3.5 rounded-xl bg-slate-950/80 border border-slate-800/80">
+              {documents.length === 0 ? (
+                <div className="p-4 text-center text-xs text-slate-500 font-mono">
+                  No documents found in this matter record. Please ingest documents first.
+                </div>
+              ) : (
+                documents.map((doc) => (
+                  <label
+                    key={doc.id}
+                    className="flex items-center gap-3 text-xs text-slate-300 hover:bg-slate-900/80 p-2.5 rounded-lg cursor-pointer transition-colors border border-transparent hover:border-slate-800"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedDocIds.includes(doc.id)}
+                      onChange={() =>
+                        setSelectedDocIds((prev) =>
+                          prev.includes(doc.id)
+                            ? prev.filter((id) => id !== doc.id)
+                            : [...prev, doc.id]
+                        )
+                      }
+                      className="rounded border-slate-700 text-amber-500 focus:ring-amber-500 bg-slate-900"
+                    />
+                    <span className="font-serif font-medium text-slate-200">{doc.title}</span>
+                    <span className="text-amber-500/80 text-[10px] ml-auto uppercase font-mono px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">
+                      {doc.document_type?.replace('_', ' ')}
+                    </span>
+                  </label>
+                ))
+              )}
             </div>
           </div>
 
-          <div className="flex justify-end pt-3 border-t border-slate-800">
+          <div className="flex justify-end pt-4 border-t border-slate-800/80">
             <Button type="submit" variant="primary" loading={generating} icon={Sparkles}>
               Synthesize IRAC Brief
             </Button>
@@ -301,11 +312,14 @@ export function BriefBuilderPage() {
       ) : brief ? (
         <div className="space-y-6">
           {/* Brief Toolbar */}
-          <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl bg-slate-900 border border-slate-800 shadow-md">
+          <div className="legal-card flex flex-wrap items-center justify-between gap-4 p-5 sm:p-6 rounded-2xl bg-slate-900/80 border border-slate-800/90 shadow-xl">
             <div>
-              <h2 className="text-lg font-bold text-slate-100">{brief.title}</h2>
-              <div className="text-xs text-slate-400">
-                Created by {brief.created_by_name || 'Counsel'}
+              <div className="text-[10px] font-mono text-amber-500/90 uppercase tracking-widest mb-1">
+                Court Brief Document
+              </div>
+              <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-100">{brief.title}</h2>
+              <div className="text-xs text-slate-400 mt-1 font-mono">
+                Drafted by Counsel: <span className="text-slate-200">{brief.created_by_name || 'Counsel'}</span>
               </div>
             </div>
 
@@ -316,7 +330,7 @@ export function BriefBuilderPage() {
                 icon={Printer}
                 onClick={() => window.print()}
               >
-                Print / Export
+                Print / Export Brief
               </Button>
 
               <FinalizeBriefButton
