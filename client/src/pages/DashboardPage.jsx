@@ -4,7 +4,7 @@ import { caseService } from '../services/caseService';
 import { CaseCard } from '../components/dashboard/CaseCard';
 import { CaseListTable } from '../components/dashboard/CaseListTable';
 import { NewCaseModal } from '../components/dashboard/NewCaseModal';
-import { Button } from '../components/common/Button';
+import { Button, LoadingSkeleton } from '../components/common/Button';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
 import { EmptyState } from '../components/common/EmptyState';
 import { ErrorBanner } from '../components/common/ErrorBanner';
