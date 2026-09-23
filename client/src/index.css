@@ -2,12 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Force HMR recompilation of Tailwind utilities */
-
 @layer base {
+  :root {
+    --legal-bg: #060B16;
+    --legal-bg-secondary: #0B1220;
+    --legal-surface: #0F1728;
+    --legal-surface-elevated: #121B2D;
+    --legal-border: #1D2A40;
+    --legal-accent: #F59E0B;
+  }
+
   body {
-    background-color: #070B14;
-    color: #F1F5F9;
+    background-color: #060B16;
+    color: #F8FAFC;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
@@ -19,75 +26,109 @@
   }
 }
 
-/* Executive Custom Scrollbar */
+/* Restrained Enterprise Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #070B14;
+  background: #060B16;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E2B45;
+  background: #1D2A40;
   border-radius: 9999px;
-  border: 1px solid rgba(217, 119, 6, 0.15);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D97706;
+  background: #2D3D5E;
 }
 
-/* Legal Brief & Judicial Document Formatting */
+/* Legal Source Text & Judicial Document Formatting */
 .legal-document-view {
-  font-family: 'Playfair Display', Georgia, serif;
-  line-height: 1.85;
+  font-family: 'Source Serif 4', 'Libre Baskerville', Georgia, serif;
+  line-height: 1.8;
   letter-spacing: 0.005em;
 }
 
 .legal-document-view p {
   margin-bottom: 1.25rem;
-  text-align: justify;
 }
 
 .legal-document-view h1,
 .legal-document-view h2,
 .legal-document-view h3 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Source Serif 4', 'Libre Baskerville', Georgia, serif;
   color: #F8FAFC;
   letter-spacing: -0.02em;
 }
 
-/* Executive Glass & Card Styling */
+/* Legal Source Quotation vs AI Analysis Separation */
+.legal-quote {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  line-height: 1.75;
+  color: #E2E8F0;
+  border-left: 2px solid rgba(245, 158, 11, 0.6);
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.ai-analysis-block {
+  background: #0B1220;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+.source-evidence-block {
+  background: #0F1728;
+  border: 1px solid #1D2A40;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+/* Professional Restrained Surface Cards */
 .legal-card {
-  background: linear-gradient(135deg, rgba(13, 21, 39, 0.95) 0%, rgba(10, 16, 30, 0.90) 100%);
-  border: 1px solid rgba(30, 43, 69, 0.8);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.45);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #0F1728;
+  border: 1px solid #1D2A40;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.35);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .legal-card:hover {
-  border-color: rgba(217, 119, 6, 0.35);
-  box-shadow: 0 8px 30px -4px rgba(217, 119, 6, 0.08), 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+  border-color: #2D3D5E;
 }
 
-.legal-glass {
-  background: rgba(13, 21, 39, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(30, 43, 69, 0.6);
+.legal-surface-elevated {
+  background: #121B2D;
+  border: 1px solid #1D2A40;
 }
 
-.gold-glow {
-  box-shadow: 0 0 25px -5px rgba(217, 119, 6, 0.25);
+/* Skeleton Loading Shimmer Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
-.gold-border-glow {
-  border-color: rgba(217, 119, 6, 0.5);
-  box-shadow: 0 0 15px -3px rgba(217, 119, 6, 0.2);
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    #0F1728 25%,
+    #1A253A 50%,
+    #0F1728 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.75s infinite;
 }
 
-/* Formal Legal Citation Chip */
+/* Monospace Technical & Citation Chips */
 .citation-chip {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }

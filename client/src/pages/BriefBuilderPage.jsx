@@ -19,6 +19,7 @@ import {
   Save,
   CheckCircle2,
   ShieldCheck,
+  Copy,
 } from 'lucide-react';
 
 export function BriefBuilderPage() {
@@ -205,11 +206,9 @@ export function BriefBuilderPage() {
 
       {/* Creation Mode */}
       {isCreatingNew ? (
-        <form onSubmit={handleGenerateBrief} className="legal-card p-7 sm:p-8 rounded-2xl bg-slate-900/80 border border-slate-800/90 space-y-7 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
-
+        <form onSubmit={handleGenerateBrief} className="legal-card p-6 sm:p-8 rounded-2xl space-y-7">
           <div>
-            <label className="block text-xs font-bold text-slate-300 uppercase tracking-widest mb-2 font-mono">
+            <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider mb-2">
               Trial Brief Document Title *
             </label>
             <input
@@ -218,19 +217,19 @@ export function BriefBuilderPage() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Plaintiff's Memorandum of Law in Support of Preliminary Injunction"
-              className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-slate-100 text-sm focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 font-serif"
+              className="w-full px-4 py-2.5 bg-[#0B1220] border border-[#1D2A40] rounded-xl text-slate-100 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 font-serif"
             />
           </div>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-widest font-mono">
+              <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider">
                 Legal Issues to Brief (IRAC Modules) *
               </label>
               <button
                 type="button"
                 onClick={handleAddIssue}
-                className="text-xs text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 transition-all font-mono"
+                className="text-xs text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/25 hover:bg-amber-500/20 transition-all font-mono cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Issue Statement</span>
@@ -248,13 +247,13 @@ export function BriefBuilderPage() {
                   value={stmt}
                   onChange={(e) => handleIssueChange(idx, e.target.value)}
                   placeholder="State the legal issue question to analyze..."
-                  className="flex-1 p-3 bg-slate-950/80 border border-slate-800 rounded-xl text-slate-100 text-sm focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                  className="flex-1 p-3 bg-[#0B1220] border border-[#1D2A40] rounded-xl text-slate-100 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 font-sans"
                 />
                 {issueStatements.length > 1 && (
                   <button
                     type="button"
                     onClick={() => handleRemoveIssue(idx)}
-                    className="p-2.5 text-slate-500 hover:text-rose-400 mt-1 rounded-lg hover:bg-rose-500/10 transition-colors"
+                    className="p-2.5 text-slate-500 hover:text-rose-400 mt-1 rounded-lg hover:bg-rose-500/10 transition-colors cursor-pointer"
                     title="Remove Issue"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -265,10 +264,10 @@ export function BriefBuilderPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 uppercase tracking-widest mb-2.5 font-mono">
+            <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider mb-2.5">
               Select Source Documents for Grounding (Required)
             </label>
-            <div className="max-h-60 overflow-y-auto space-y-2 p-3.5 rounded-xl bg-slate-950/80 border border-slate-800/80">
+            <div className="max-h-60 overflow-y-auto space-y-2 p-3.5 rounded-xl bg-[#0B1220] border border-[#1D2A40]">
               {documents.length === 0 ? (
                 <div className="p-4 text-center text-xs text-slate-500 font-mono">
                   No documents found in this matter record. Please ingest documents first.
@@ -277,7 +276,7 @@ export function BriefBuilderPage() {
                 documents.map((doc) => (
                   <label
                     key={doc.id}
-                    className="flex items-center gap-3 text-xs text-slate-300 hover:bg-slate-900/80 p-2.5 rounded-lg cursor-pointer transition-colors border border-transparent hover:border-slate-800"
+                    className="flex items-center gap-3 text-xs text-slate-300 hover:bg-[#121B2D] p-2.5 rounded-lg cursor-pointer transition-colors border border-transparent hover:border-[#1D2A40]"
                   >
                     <input
                       type="checkbox"
@@ -289,10 +288,10 @@ export function BriefBuilderPage() {
                             : [...prev, doc.id]
                         )
                       }
-                      className="rounded border-slate-700 text-amber-500 focus:ring-amber-500 bg-slate-900"
+                      className="rounded border-[#1D2A40] text-amber-500 focus:ring-amber-500 bg-[#060B16]"
                     />
                     <span className="font-serif font-medium text-slate-200">{doc.title}</span>
-                    <span className="text-amber-500/80 text-[10px] ml-auto uppercase font-mono px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">
+                    <span className="text-amber-400 text-[10px] ml-auto uppercase font-mono px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/25">
                       {doc.document_type?.replace('_', ' ')}
                     </span>
                   </label>
@@ -301,7 +300,7 @@ export function BriefBuilderPage() {
             </div>
           </div>
 
-          <div className="flex justify-end pt-4 border-t border-slate-800/80">
+          <div className="flex justify-end pt-4 border-t border-[#1D2A40]">
             <Button type="submit" variant="primary" loading={generating} icon={Sparkles}>
               Synthesize IRAC Brief
             </Button>
@@ -312,7 +311,7 @@ export function BriefBuilderPage() {
       ) : brief ? (
         <div className="space-y-6">
           {/* Brief Toolbar */}
-          <div className="legal-card flex flex-wrap items-center justify-between gap-4 p-5 sm:p-6 rounded-2xl bg-slate-900/80 border border-slate-800/90 shadow-xl">
+          <div className="legal-card flex flex-wrap items-center justify-between gap-4 p-5 sm:p-6 rounded-2xl">
             <div>
               <div className="text-[10px] font-mono text-amber-500/90 uppercase tracking-widest mb-1">
                 Court Brief Document
@@ -323,7 +322,27 @@ export function BriefBuilderPage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <Button
+                variant="secondary"
+                size="sm"
+                icon={Copy}
+                onClick={() => {
+                  const plainText = parsedContent?.sections
+                    ?.map(
+                      (s, i) =>
+                        `SECTION ${i + 1}\n\nI. ISSUE:\n${s.issueStatement}\n\nII. RULE:\n${s.applicableRule}\n\nIII. APPLICATION:\n${s.analysis}\n\nIV. CONCLUSION:\n${s.conclusion}\n`
+                    )
+                    .join('\n---\n\n');
+                  if (plainText) {
+                    navigator.clipboard.writeText(plainText);
+                    alert('Full brief copied to clipboard in plain text format.');
+                  }
+                }}
+              >
+                Copy Brief
+              </Button>
+
               <Button
                 variant="secondary"
                 size="sm"

@@ -12,6 +12,7 @@ export function AppShell() {
   const caseId = params.caseId || (match ? match[1] : null);
 
   const [activeCase, setActiveCase] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (caseId) {
@@ -24,12 +25,17 @@ export function AppShell() {
     }
   }, [caseId]);
 
+  // Close mobile drawer on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-slate-950 text-slate-100">
-      <Sidebar />
+    <div className="flex h-screen w-screen overflow-hidden bg-[#060B16] text-[#F8FAFC]">
+      <Sidebar mobileOpen={mobileMenuOpen} onCloseMobile={() => setMobileMenuOpen(false)} />
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <TopNav activeCase={activeCase} />
-        <main className="flex-1 overflow-y-auto bg-slate-900/30">
+        <TopNav activeCase={activeCase} onToggleMobileMenu={() => setMobileMenuOpen(!mobileMenuOpen)} />
+        <main className="flex-1 overflow-y-auto bg-[#060B16]">
           <Outlet context={{ activeCase, refreshCase: () => caseId && caseService.getCase(caseId).then(setActiveCase) }} />
         </main>
       </div>

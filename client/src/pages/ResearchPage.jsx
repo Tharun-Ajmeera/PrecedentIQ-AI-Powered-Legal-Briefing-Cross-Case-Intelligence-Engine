@@ -67,30 +67,30 @@ export function ResearchPage() {
   };
 
   return (
-    <div className="p-8 max-w-5xl mx-auto space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="p-6 md:p-8 max-w-5xl mx-auto space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <Link
           to={`/cases/${caseId}`}
-          className="text-xs text-slate-400 hover:text-amber-300 flex items-center gap-1 transition-colors font-medium"
+          className="text-xs text-slate-400 hover:text-amber-300 flex items-center gap-1.5 transition-colors font-medium"
         >
           <ChevronLeft className="w-4 h-4" />
           <span>Back to Matter Dossier</span>
         </Link>
 
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/30 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
-          <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span>Zero-Hallucination Verification Layer: 100% Active</span>
+        <div className="flex items-center gap-1.5 px-3 py-1 rounded bg-[#0B1220] border border-emerald-500/30 text-emerald-400 text-xs font-mono self-start sm:self-auto">
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+          <span>Page-Level Citation Verification Active</span>
         </div>
       </div>
 
       <div>
-        <h1 className="text-3xl font-serif font-bold text-slate-100 tracking-tight flex items-center gap-3">
+        <h1 className="text-2xl sm:text-3xl font-serif font-bold text-slate-100 tracking-tight flex items-center gap-3">
           <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/25">
-            <Search className="w-6 h-6 stroke-[2]" />
+            <Search className="w-5 h-5 stroke-[2]" />
           </div>
           <span>Precedent RAG & Fact Cross-Examination</span>
         </h1>
-        <p className="text-xs text-slate-400 mt-2 max-w-2xl leading-relaxed">
+        <p className="text-xs text-slate-400 mt-1.5 max-w-2xl leading-relaxed">
           Inquire across this matter's uploaded record. Every retrieved paragraph is mapped to exact page coordinates with cosine-similarity reranking and cross-document attribution verification.
         </p>
       </div>

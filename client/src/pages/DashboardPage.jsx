@@ -78,29 +78,29 @@ export function DashboardPage() {
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8">
       {/* Executive Portfolio Hero */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#1E2B45]">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#1D2A40]">
         <div>
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-500 font-semibold mb-1">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-amber-500 font-semibold mb-1">
             <Scale className="w-3.5 h-3.5" />
             <span>Practice Dossier Command</span>
           </div>
-          <h1 className="text-3xl font-serif font-bold text-slate-100 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#F8FAFC] tracking-tight">
             Case Matters & Legal Intelligence
           </h1>
-          <p className="text-xs text-slate-400 mt-1 max-w-2xl leading-relaxed">
-            Multi-tenant isolated case repository. Index evidence files, execute grounded RAG inquiries, identify adversary vulnerabilities, and synthesize court-ready trial briefs.
+          <p className="text-xs text-[#94A3B8] mt-1 max-w-2xl leading-relaxed">
+            Multi-tenant isolated matter repository. Ingest evidence files, execute grounded RAG inquiries, identify adversary vulnerabilities, and synthesize court-ready trial briefs.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <Button
-            variant="outline"
+            variant="secondary"
             size="sm"
             onClick={handleSeed}
             loading={seeding}
             icon={Sparkles}
           >
-            Seed Sample Case
+            Load Sample Case
           </Button>
           <Button
             variant="primary"
@@ -114,72 +114,72 @@ export function DashboardPage() {
       </div>
 
       {/* Executive KPI Summary Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="legal-card p-4 rounded-xl">
-          <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Active Matters</div>
-          <div className="mt-1 font-serif text-2xl font-bold text-slate-100">{cases.length}</div>
-          <div className="mt-1 text-[10px] text-emerald-400 font-medium">Tenant Isolated</div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
+        <div className="legal-card p-4">
+          <div className="text-[11px] font-mono text-[#94A3B8] uppercase tracking-wider">Active Matters</div>
+          <div className="mt-1 font-serif text-2xl font-bold text-[#F8FAFC]">{cases.length}</div>
+          <div className="mt-1 text-[10px] text-emerald-400 font-mono">RLS Tenant Isolated</div>
         </div>
-        <div className="legal-card p-4 rounded-xl">
-          <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Indexed Documents</div>
+        <div className="legal-card p-4">
+          <div className="text-[11px] font-mono text-[#94A3B8] uppercase tracking-wider">Indexed Documents</div>
           <div className="mt-1 font-serif text-2xl font-bold text-amber-400">{totalDocuments}</div>
-          <div className="mt-1 text-[10px] text-slate-400">PDF, DOCX, TXT Evidence</div>
+          <div className="mt-1 text-[10px] text-[#94A3B8] font-mono">PDF, DOCX, TXT Evidence</div>
         </div>
-        <div className="legal-card p-4 rounded-xl">
-          <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Synthesized Briefs</div>
-          <div className="mt-1 font-serif text-2xl font-bold text-slate-100">{totalBriefs}</div>
-          <div className="mt-1 text-[10px] text-amber-400/80">IRAC Structured</div>
+        <div className="legal-card p-4">
+          <div className="text-[11px] font-mono text-[#94A3B8] uppercase tracking-wider">Synthesized Briefs</div>
+          <div className="mt-1 font-serif text-2xl font-bold text-[#F8FAFC]">{totalBriefs}</div>
+          <div className="mt-1 text-[10px] text-amber-400/90 font-mono">IRAC Structured</div>
         </div>
-        <div className="legal-card p-4 rounded-xl">
-          <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Citation Integrity</div>
+        <div className="legal-card p-4">
+          <div className="text-[11px] font-mono text-[#94A3B8] uppercase tracking-wider">Citation Integrity</div>
           <div className="mt-1 font-serif text-2xl font-bold text-emerald-400">100%</div>
-          <div className="mt-1 text-[10px] text-emerald-400">Zero Hallucination Guaranteed</div>
+          <div className="mt-1 text-[10px] text-emerald-400 font-mono">Page-Level Verification Active</div>
         </div>
       </div>
 
       {error && <ErrorBanner message={error} onDismiss={() => setError(null)} />}
 
       {/* Filter and View Mode Toolbar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-        <div className="relative w-full sm:w-96">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
+        <div className="relative w-full sm:w-80">
+          <Search className="w-3.5 h-3.5 text-[#64748B] absolute left-3 top-2.5" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search matters by case title, docket #, jurisdiction..."
-            className="w-full pl-9 pr-3 py-2 bg-[#0D1527] border border-[#1E2B45] rounded-lg text-slate-100 placeholder-slate-500 text-xs focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/60 shadow-inner transition-all"
+            placeholder="Search matters by case title, docket #..."
+            className="w-full pl-9 pr-3 py-1.5 bg-[#0B1220] border border-[#1D2A40] rounded-lg text-[#F8FAFC] placeholder-[#64748B] text-xs focus:outline-none focus:border-amber-500 transition-colors"
           />
         </div>
 
-        <div className="flex items-center gap-1.5 bg-[#0D1527] p-1 rounded-lg border border-[#1E2B45] self-end sm:self-auto">
+        <div className="flex items-center gap-1 bg-[#0B1220] p-1 rounded-lg border border-[#1D2A40] self-end sm:self-auto">
           <button
             onClick={() => setViewMode('grid')}
             className={`p-1.5 rounded text-xs transition-colors cursor-pointer ${
-              viewMode === 'grid' ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30' : 'text-slate-400 hover:text-slate-200'
+              viewMode === 'grid' ? 'bg-[#0F1728] text-amber-400 border border-[#1D2A40]' : 'text-[#64748B] hover:text-[#F8FAFC]'
             }`}
             title="Grid View"
           >
-            <LayoutGrid className="w-4 h-4" />
+            <LayoutGrid className="w-3.5 h-3.5" />
           </button>
           <button
             onClick={() => setViewMode('table')}
             className={`p-1.5 rounded text-xs transition-colors cursor-pointer ${
-              viewMode === 'table' ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30' : 'text-slate-400 hover:text-slate-200'
+              viewMode === 'table' ? 'bg-[#0F1728] text-amber-400 border border-[#1D2A40]' : 'text-[#64748B] hover:text-[#F8FAFC]'
             }`}
             title="Table View"
           >
-            <List className="w-4 h-4" />
+            <List className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
 
       {/* Content Area */}
       {loading ? (
-        <LoadingSpinner text="Retrieving firm matters..." />
+        <LoadingSkeleton type="card" count={3} />
       ) : filteredCases.length > 0 ? (
         viewMode === 'grid' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredCases.map((legalCase) => (
               <CaseCard
                 key={legalCase.id}
@@ -198,12 +198,12 @@ export function DashboardPage() {
           description={
             searchQuery
               ? 'No matters matched your search query.'
-              : 'Create a new legal matter or load the seeded demo case to begin reviewing documents.'
+              : 'Create a new legal matter or load the sample case to begin evidentiary analysis.'
           }
           action={
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={handleSeed} loading={seeding}>
-                Load Demo Matter
+            <div className="flex gap-2.5">
+              <Button variant="secondary" size="sm" onClick={handleSeed} loading={seeding}>
+                Load Sample Case
               </Button>
               <Button
                 variant="primary"
@@ -211,7 +211,7 @@ export function DashboardPage() {
                 icon={FolderPlus}
                 onClick={() => setIsModalOpen(true)}
               >
-                Create First Matter
+                New Matter
               </Button>
             </div>
           }

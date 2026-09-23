@@ -28,13 +28,10 @@ export function IracSectionEditor({ section, index, isFinalized, onUpdate, onDel
   };
 
   return (
-    <div className="legal-card rounded-xl p-6 sm:p-7 space-y-5 bg-slate-900/70 border border-slate-800/90 shadow-xl relative overflow-hidden">
-      {/* Decorative top gold rim */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
-
-      <div className="flex items-center justify-between pb-4 border-b border-slate-800/80">
+    <div className="legal-card rounded-2xl p-6 sm:p-7 space-y-5">
+      <div className="flex items-center justify-between pb-4 border-b border-[#1D2A40]">
         <div className="flex items-center gap-3">
-          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 font-serif font-bold text-sm border border-amber-500/25 shadow-inner">
+          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 font-mono font-bold text-sm border border-amber-500/25">
             {index + 1}
           </span>
           <div>
@@ -50,7 +47,7 @@ export function IracSectionEditor({ section, index, isFinalized, onUpdate, onDel
         <div className="flex items-center gap-2">
           {!isFinalized && !editing && (
             <Button
-              variant="outline"
+              variant="secondary"
               size="sm"
               icon={Edit3}
               onClick={() => setEditing(true)}
@@ -66,7 +63,7 @@ export function IracSectionEditor({ section, index, isFinalized, onUpdate, onDel
           {!isFinalized && onDelete && (
             <button
               onClick={() => onDelete(index)}
-              className="text-slate-500 hover:text-rose-400 p-2 rounded-lg hover:bg-rose-500/10 transition-colors"
+              className="text-slate-500 hover:text-rose-400 p-2 rounded-lg hover:bg-rose-500/10 transition-colors cursor-pointer"
               title="Delete Section"
             >
               <Trash2 className="w-4 h-4" />
@@ -78,50 +75,50 @@ export function IracSectionEditor({ section, index, isFinalized, onUpdate, onDel
       {editing ? (
         <div className="space-y-4">
           <div>
-            <label className="block text-[11px] font-bold text-amber-400/90 uppercase tracking-widest mb-1.5 font-mono">
-              I. Issue Statement / Question Presented
+            <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              I. Question Presented (Issue Statement)
             </label>
             <textarea
               rows={2}
               value={formData.issueStatement}
               onChange={(e) => setFormData({ ...formData, issueStatement: e.target.value })}
-              className="w-full p-3 bg-slate-950/80 border border-slate-800 rounded-lg text-slate-100 text-sm focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+              className="w-full p-3 bg-[#0B1220] border border-[#1D2A40] rounded-lg text-slate-100 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 font-sans"
             />
           </div>
 
           <div>
-            <label className="block text-[11px] font-bold text-amber-400/90 uppercase tracking-widest mb-1.5 font-mono">
+            <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
               II. Applicable Controlling Rule of Law
             </label>
             <textarea
               rows={3}
               value={formData.applicableRule}
               onChange={(e) => setFormData({ ...formData, applicableRule: e.target.value })}
-              className="w-full p-3 bg-slate-950/80 border border-slate-800 rounded-lg text-slate-100 text-sm focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 font-serif"
+              className="w-full p-3 bg-[#0B1220] border border-[#1D2A40] rounded-lg text-slate-100 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 font-serif"
             />
           </div>
 
           <div>
-            <label className="block text-[11px] font-bold text-amber-400/90 uppercase tracking-widest mb-1.5 font-mono">
-              III. Application & Factual Synthesis
+            <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              III. Application to Record Facts & Legal Synthesis
             </label>
             <textarea
               rows={4}
               value={formData.analysis}
               onChange={(e) => setFormData({ ...formData, analysis: e.target.value })}
-              className="w-full p-3 bg-slate-950/80 border border-slate-800 rounded-lg text-slate-100 text-sm focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+              className="w-full p-3 bg-[#0B1220] border border-[#1D2A40] rounded-lg text-slate-100 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 font-sans"
             />
           </div>
 
           <div>
-            <label className="block text-[11px] font-bold text-amber-400/90 uppercase tracking-widest mb-1.5 font-mono">
+            <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
               IV. Conclusion / Prayer for Relief
             </label>
             <textarea
               rows={2}
               value={formData.conclusion}
               onChange={(e) => setFormData({ ...formData, conclusion: e.target.value })}
-              className="w-full p-3 bg-slate-950/80 border border-slate-800 rounded-lg text-slate-100 text-sm focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+              className="w-full p-3 bg-[#0B1220] border border-[#1D2A40] rounded-lg text-slate-100 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 font-sans"
             />
           </div>
         </div>
@@ -129,24 +126,24 @@ export function IracSectionEditor({ section, index, isFinalized, onUpdate, onDel
         <div className="space-y-5 legal-document-view">
           {/* Issue */}
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-widest text-amber-500 block mb-1.5 font-mono">
+            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-amber-500 block mb-1">
               I. Question Presented (Issue):
             </span>
-            <p className="text-slate-100 text-sm font-semibold leading-relaxed pl-3 border-l-2 border-amber-500/40">
+            <p className="text-slate-100 text-sm font-semibold leading-relaxed pl-3 border-l-2 border-amber-500/50">
               {section.issueStatement}
             </p>
           </div>
 
           {/* Rule */}
-          <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/90 shadow-inner">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-amber-500 block mb-1.5 font-mono">
+          <div className="p-4 rounded-xl bg-[#0B1220] border border-[#1D2A40]">
+            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-amber-500 block mb-1.5">
               II. Governing Rule of Law & Statutory Standards:
             </span>
-            <p className="text-slate-200 text-sm font-serif leading-relaxed italic pl-3 border-l-2 border-amber-500/30">
+            <blockquote className="legal-quote text-sm text-slate-200">
               "{section.applicableRule}"
-            </p>
+            </blockquote>
             {section.ruleCitations && section.ruleCitations.length > 0 && (
-              <div className="mt-3.5 pt-3 border-t border-slate-800/80 flex flex-wrap items-center gap-2">
+              <div className="mt-3 pt-3 border-t border-[#1D2A40] flex flex-wrap items-center gap-2">
                 <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
                   Grounding Record:
                 </span>
@@ -158,21 +155,21 @@ export function IracSectionEditor({ section, index, isFinalized, onUpdate, onDel
           </div>
 
           {/* Analysis */}
-          <div>
-            <span className="text-[11px] font-bold uppercase tracking-widest text-amber-500 block mb-1.5 font-mono">
+          <div className="ai-analysis-block">
+            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-amber-400/90 block mb-1.5">
               III. Application to Record Facts:
             </span>
-            <p className="text-slate-300 text-sm leading-relaxed pl-3 border-l-2 border-slate-700">
+            <p className="text-slate-200 text-sm leading-relaxed font-sans">
               {section.analysis}
             </p>
           </div>
 
           {/* Conclusion */}
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-widest text-amber-500 block mb-1.5 font-mono">
+            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-emerald-400 block mb-1">
               IV. Conclusion & Relief Sought:
             </span>
-            <p className="text-slate-100 text-sm font-medium pl-3 border-l-2 border-emerald-500/40">
+            <p className="text-slate-100 text-sm font-medium pl-3 border-l-2 border-emerald-500/50">
               {section.conclusion}
             </p>
           </div>
@@ -184,16 +181,16 @@ export function IracSectionEditor({ section, index, isFinalized, onUpdate, onDel
 
 export function BriefVersionHistory({ brief }) {
   return (
-    <div className="legal-card p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400">
+    <div className="legal-card p-4 rounded-xl flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400">
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2 text-slate-200 font-semibold">
           <Scroll className="w-4 h-4 text-amber-400" />
           <span className="font-serif">Revision Archive:</span>
-          <span className="px-2 py-0.5 rounded font-mono text-amber-400 bg-amber-500/10 border border-amber-500/20">
+          <span className="px-2 py-0.5 rounded font-mono text-amber-400 bg-amber-500/10 border border-amber-500/25">
             v{brief.version}.0
           </span>
         </div>
-        <span className="text-slate-700">•</span>
+        <span className="text-slate-700 hidden sm:inline">•</span>
         <span className="font-mono text-slate-400">
           Last modified: {new Date(brief.updated_at || brief.created_at).toLocaleString()}
         </span>
@@ -201,10 +198,10 @@ export function BriefVersionHistory({ brief }) {
 
       <div className="flex items-center gap-2">
         <span
-          className={`px-3 py-1 rounded-full font-mono font-bold uppercase tracking-wider text-[10px] border shadow-sm ${
+          className={`px-3 py-1 rounded font-mono font-semibold uppercase tracking-wider text-[10px] border ${
             brief.status === 'finalized'
-              ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30 shadow-emerald-950/30'
-              : 'bg-amber-500/15 text-amber-400 border-amber-500/30 shadow-amber-950/30'
+              ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
+              : 'bg-amber-500/10 text-amber-400 border-amber-500/30'
           }`}
         >
           {brief.status === 'finalized' ? '✓ Locked for Court Filing' : 'Draft In Progress'}
@@ -221,7 +218,7 @@ export function FinalizeBriefButton({ brief, onFinalize, loading }) {
 
   if (isFinalized) {
     return (
-      <div className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-emerald-950/40 border border-emerald-800/60 text-emerald-400 text-xs font-semibold shadow-inner font-mono">
+      <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold font-mono">
         <ShieldCheck className="w-4 h-4 text-emerald-400" />
         <span>Certified & Filing-Ready</span>
       </div>

@@ -55,8 +55,8 @@ export function AuditPage() {
 
   return (
     <RoleGuard allowedRoles={['attorney', 'compliance_officer']}>
-      <div className="p-6 sm:p-10 max-w-6xl mx-auto space-y-7">
-        <div className="flex items-center justify-between">
+      <div className="p-6 md:p-8 max-w-6xl mx-auto space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           {caseId ? (
             <Link
               to={`/cases/${caseId}`}
@@ -75,21 +75,18 @@ export function AuditPage() {
             </Link>
           )}
 
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-950/40 border border-emerald-800/60 text-emerald-400 text-xs font-mono">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded bg-[#0B1220] border border-emerald-500/30 text-emerald-400 text-xs font-mono self-start sm:self-auto">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
             <span>Append-Only Forensic Ledger</span>
           </div>
         </div>
 
         <div>
-          <div className="text-amber-500 font-mono text-xs uppercase tracking-widest mb-1">
-            Institutional Governance & Chain of Custody
-          </div>
-          <h1 className="text-3xl font-serif font-bold text-slate-100 tracking-tight flex items-center gap-3">
-            <History className="w-7 h-7 text-amber-500" />
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-slate-100 tracking-tight flex items-center gap-3">
+            <History className="w-6 h-6 text-amber-500" />
             <span>Forensic Audit Ledger</span>
           </h1>
-          <p className="text-sm text-slate-400 mt-1.5 leading-relaxed max-w-3xl">
+          <p className="text-xs text-slate-400 mt-1.5 leading-relaxed max-w-3xl">
             Cryptographically timestamped audit trail of all evidentiary uploads, vector indexing jobs, partner IRAC brief certifications, and AI legal queries.
           </p>
         </div>

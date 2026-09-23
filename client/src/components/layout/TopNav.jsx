@@ -1,11 +1,10 @@
 // client/src/components/layout/TopNav.jsx
 import React, { useState } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { ShieldCheck, Sparkles, ChevronRight, Folder, Scale } from 'lucide-react';
-import { Button } from '../common/Button';
+import { ShieldCheck, Sparkles, ChevronRight, Folder, Menu } from 'lucide-react';
 import { caseService } from '../../services/caseService';
 
-export function TopNav({ activeCase }) {
+export function TopNav({ activeCase, onToggleMobileMenu }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [seeding, setSeeding] = useState(false);
@@ -27,29 +26,38 @@ export function TopNav({ activeCase }) {
   };
 
   return (
-    <header className="h-16 px-6 border-b border-[#1E2B45] bg-[#070B14]/80 backdrop-blur-md flex items-center justify-between flex-shrink-0 z-20">
-      {/* Executive Breadcrumb Trail */}
-      <div className="flex items-center gap-2.5 text-xs text-slate-400">
-        <Link to="/dashboard" className="hover:text-amber-400 transition-colors flex items-center gap-1.5 font-medium tracking-wide">
+    <header className="h-14 px-4 sm:px-6 border-b border-[#1D2A40] bg-[#060B16] flex items-center justify-between flex-shrink-0 z-20">
+      {/* Breadcrumb Trail & Mobile Toggle */}
+      <div className="flex items-center gap-2 text-xs text-[#94A3B8] min-w-0">
+        {onToggleMobileMenu && (
+          <button
+            onClick={onToggleMobileMenu}
+            className="md:hidden p-1.5 rounded text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#0F1728] mr-1"
+            title="Toggle Menu"
+          >
+            <Menu className="w-4 h-4" />
+          </button>
+        )}
+
+        <Link
+          to="/dashboard"
+          className="hover:text-amber-400 transition-colors flex items-center gap-1.5 font-medium flex-shrink-0"
+        >
           <Folder className="w-3.5 h-3.5 text-amber-500" />
-          <span>Practice Portfolio</span>
+          <span className="hidden sm:inline">Practice Portfolio</span>
+          <span className="sm:hidden">Portfolio</span>
         </Link>
 
         {activeCase && (
           <>
-            <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
-            <div className="flex items-center gap-2 max-w-xl truncate">
-              <span className="font-serif text-slate-100 font-semibold text-sm truncate tracking-tight">
+            <ChevronRight className="w-3.5 h-3.5 text-[#64748B] flex-shrink-0" />
+            <div className="flex items-center gap-2 truncate min-w-0">
+              <span className="font-serif text-[#F8FAFC] font-semibold text-xs sm:text-sm truncate">
                 {activeCase.title}
               </span>
               {activeCase.matter_number && (
-                <span className="font-mono text-[10px] bg-[#0D1527] text-amber-400/90 px-2 py-0.5 rounded border border-amber-500/25 tracking-wider">
+                <span className="hidden md:inline-block font-mono text-[10px] bg-[#0B1220] text-amber-400 px-2 py-0.5 rounded border border-[#1D2A40] flex-shrink-0">
                   {activeCase.matter_number}
-                </span>
-              )}
-              {activeCase.jurisdiction && (
-                <span className="text-[10px] bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded border border-slate-700">
-                  {activeCase.jurisdiction}
                 </span>
               )}
             </div>
@@ -57,21 +65,17 @@ export function TopNav({ activeCase }) {
         )}
       </div>
 
-      {/* Security Status & Global Actions */}
-      <div className="flex items-center gap-3">
-        <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/30 border border-emerald-500/30 text-emerald-300 text-xs font-medium shadow-sm shadow-emerald-950/20">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-          </span>
-          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-          <span className="font-mono text-[11px] tracking-tight">Zero-Hallucination Engine: ACTIVE</span>
+      {/* Verification Status & Global Actions */}
+      <div className="flex items-center gap-3 flex-shrink-0">
+        <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#0B1220] border border-[#1D2A40] text-xs font-mono text-[#94A3B8]">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+          <span className="text-[11px] text-slate-300">Evidence Traceability Active</span>
         </div>
 
         <button
           onClick={handleSeedDemo}
           disabled={seeding}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 hover:border-amber-500/50 shadow-sm shadow-amber-950/30 transition-all cursor-pointer disabled:opacity-50"
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium text-amber-400 bg-amber-500/10 hover:bg-amber-500/15 border border-amber-500/30 transition-colors cursor-pointer disabled:opacity-50"
         >
           <Sparkles className="w-3.5 h-3.5 text-amber-400" />
           <span>{seeding ? 'Seeding...' : 'Load Sample Case'}</span>

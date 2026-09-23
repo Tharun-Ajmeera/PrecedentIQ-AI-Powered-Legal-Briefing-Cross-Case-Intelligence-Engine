@@ -35,7 +35,7 @@ export function LoginForm() {
       {error && <ErrorBanner message={error} onDismiss={() => setError(null)} />}
 
       <div>
-        <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+        <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
           Email Address
         </label>
         <div className="relative">
@@ -46,13 +46,13 @@ export function LoginForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="attorney@lawfirm.com"
-            className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full pl-9 pr-3 py-2.5 bg-[#0B1220] border border-[#1D2A40] rounded-xl text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 transition-all font-sans"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+        <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
           Password
         </label>
         <div className="relative">
@@ -63,7 +63,7 @@ export function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••••••"
-            className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full pl-9 pr-3 py-2.5 bg-[#0B1220] border border-[#1D2A40] rounded-xl text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 transition-all font-sans"
           />
         </div>
       </div>
@@ -74,7 +74,7 @@ export function LoginForm() {
 
       <div className="text-center pt-2">
         <span className="text-xs text-slate-400">Need to register a new firm? </span>
-        <Link to="/register" className="text-xs font-semibold text-amber-500 hover:text-amber-400 underline">
+        <Link to="/register" className="text-xs font-semibold text-amber-400 hover:text-amber-300 underline font-mono">
           Create Account
         </Link>
       </div>
@@ -130,7 +130,7 @@ export function RegisterForm() {
       {error && <ErrorBanner message={error} details={details} onDismiss={() => setError(null)} />}
 
       <div>
-        <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+        <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
           Law Firm / Organization Name
         </label>
         <input
@@ -139,13 +139,13 @@ export function RegisterForm() {
           value={firmName}
           onChange={(e) => setFirmName(e.target.value)}
           placeholder="e.g. Wachtell, Lipton & Rosen LLP"
-          className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+          className="w-full px-3.5 py-2.5 bg-[#0B1220] border border-[#1D2A40] rounded-xl text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 transition-all font-sans"
         />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+          <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
             Full Name
           </label>
           <input
@@ -154,18 +154,18 @@ export function RegisterForm() {
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             placeholder="Jane Doe, Esq."
-            className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full px-3.5 py-2.5 bg-[#0B1220] border border-[#1D2A40] rounded-xl text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 transition-all font-sans"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+          <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
             Role
           </label>
           <select
             value={role}
             onChange={(e) => setRole(e.target.value)}
-            className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full px-3.5 py-2.5 bg-[#0B1220] border border-[#1D2A40] rounded-xl text-slate-100 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 transition-all cursor-pointer font-sans"
           >
             <option value="attorney">Attorney (Full Authority)</option>
             <option value="paralegal">Paralegal (Research & Drafts)</option>
@@ -175,7 +175,7 @@ export function RegisterForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+        <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
           Corporate Email Address
         </label>
         <input
@@ -184,12 +184,12 @@ export function RegisterForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="jdoe@firm.com"
-          className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+          className="w-full px-3.5 py-2.5 bg-[#0B1220] border border-[#1D2A40] rounded-xl text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 transition-all font-sans"
         />
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+        <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
           Password (min 10 characters)
         </label>
         <input
@@ -199,9 +199,9 @@ export function RegisterForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="••••••••••••"
-          className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+          className="w-full px-3.5 py-2.5 bg-[#0B1220] border border-[#1D2A40] rounded-xl text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 transition-all font-sans"
         />
-        <p className="text-[11px] text-slate-500 mt-1">Must be at least 10 characters.</p>
+        <p className="text-[11px] font-mono text-slate-500 mt-1">Must be at least 10 characters.</p>
       </div>
 
       <Button type="submit" variant="primary" loading={loading} className="w-full mt-2">
@@ -210,7 +210,7 @@ export function RegisterForm() {
 
       <div className="text-center pt-2">
         <span className="text-xs text-slate-400">Already registered? </span>
-        <Link to="/login" className="text-xs font-semibold text-amber-500 hover:text-amber-400 underline">
+        <Link to="/login" className="text-xs font-semibold text-amber-400 hover:text-amber-300 underline font-mono">
           Sign In
         </Link>
       </div>

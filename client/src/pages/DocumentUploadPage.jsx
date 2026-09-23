@@ -28,11 +28,11 @@ export function DocumentUploadPage() {
   }, [caseId]);
 
   return (
-    <div className="p-8 max-w-5xl mx-auto space-y-6">
+    <div className="p-6 md:p-8 max-w-5xl mx-auto space-y-6">
       <div className="flex items-center gap-2">
         <Link
           to={`/cases/${caseId}`}
-          className="text-xs text-slate-400 hover:text-amber-400 flex items-center gap-1 transition-colors"
+          className="text-xs text-slate-400 hover:text-amber-400 flex items-center gap-1.5 transition-colors"
         >
           <ChevronLeft className="w-4 h-4" />
           <span>Back to Matter Workspace</span>
@@ -40,12 +40,12 @@ export function DocumentUploadPage() {
       </div>
 
       <div>
-        <h1 className="text-2xl font-bold text-slate-100 tracking-tight flex items-center gap-2.5">
+        <h1 className="text-2xl font-serif font-bold text-slate-100 tracking-tight flex items-center gap-2.5">
           <UploadCloud className="w-6 h-6 text-amber-500" />
           <span>Document Ingestion & Vector Indexing</span>
         </h1>
         <p className="text-xs text-slate-400 mt-1">
-          Upload court filings, precedents, agreements, and witness transcripts. Our ingestion pipeline preserves exact page boundaries and generates 768-dim embeddings for zero-hallucination citation grounding.
+          Upload court filings, precedents, agreements, and witness transcripts. Our ingestion pipeline preserves exact page boundaries and generates 768-dim embeddings for evidence-grounded retrieval and page-level citation verification.
         </p>
       </div>
 
